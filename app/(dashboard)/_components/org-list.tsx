@@ -1,7 +1,7 @@
 "use client";
 
 import { useOrganizationList } from "@clerk/nextjs";
-import { OrganizationIcon } from "./org-image";
+import { OrganizationIcon } from "./org-icon";
 
 export const OrganizationList = () => {
   const { userMemberships } = useOrganizationList({
