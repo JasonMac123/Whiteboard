@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
+import { HoverHint } from "@/components/hover-hint";
 
 interface OrganizationIconProps {
   id: string;
@@ -29,16 +30,18 @@ export const OrganizationIcon = ({
 
   return (
     <div className="aspect-square relative">
-      <Image
-        src={imageUrl}
-        onClick={onClick}
-        alt={name}
-        fill
-        className={cn(
-          "rounded-md cursor-pointer opacity-75 hover:opacity-100 transition",
-          isActive && "opacity-100"
-        )}
-      />
+      <HoverHint label={name} side="right" sideOffset={20}>
+        <Image
+          src={imageUrl}
+          onClick={onClick}
+          alt={name}
+          fill
+          className={cn(
+            "rounded-md cursor-pointer opacity-75 hover:opacity-100 transition",
+            isActive && "opacity-100"
+          )}
+        />
+      </HoverHint>
     </div>
   );
 };
