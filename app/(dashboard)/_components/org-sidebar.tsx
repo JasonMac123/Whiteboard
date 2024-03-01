@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 
+import { OrganizationSwitcher } from "@clerk/nextjs";
+
 import { cn } from "@/lib/utils";
 
 const font = Poppins({
@@ -27,6 +29,27 @@ export const OrgSidebar = () => {
           </span>
         </div>
       </Link>
+      <OrganizationSwitcher
+        hidePersonal
+        appearance={{
+          elements: {
+            rootBox: {
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            },
+            organizationSwitcherTrigger: {
+              padding: "6px",
+              width: "100%",
+              borderRadius: "8px",
+              border: "1px solid #E5E7EB",
+              justifyContent: "space-between",
+              backgroundColor: "white",
+            },
+          },
+        }}
+      />
     </div>
   );
 };
