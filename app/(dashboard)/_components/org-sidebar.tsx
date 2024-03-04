@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Poppins } from "next/font/google";
 
+import { LayoutDashboard, Star } from "lucide-react";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -14,6 +18,9 @@ const font = Poppins({
 });
 
 export const OrgSidebar = () => {
+  const searchParams = useSearchParams();
+  const favourites = searchParams.get("favourites");
+
   return (
     <div className="hidden lg:flex flex-col space-y-6 w-[310px] pl-5 pt-5">
       <Link href={"/"}>
@@ -50,6 +57,30 @@ export const OrgSidebar = () => {
           },
         }}
       />
+      <div className="space-y-1 w-full">
+        <Button
+          asChild
+          variant={favourites ? "ghost" : "secondary"}
+          size="lg"
+          className="font-normal justify-start px-2 w-full"
+        >
+          <Link href="/">
+            <LayoutDashboard className="h-4 w-4 mr-2" />
+            Group Boards
+          </Link>
+        </Button>
+        <Button
+          asChild
+          variant={favourites ? "secondary" : "ghost"}
+          size="lg"
+          className="font-normal justify-start px-2 w-full"
+        >
+          <Link href={{ pathname: "/", query: { favourites: true } }}>
+            <Star className="h-4 w-4 mr-2" />
+            Favourites Boards
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 };
