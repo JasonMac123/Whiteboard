@@ -12,7 +12,9 @@ import { Input } from "@/components/ui/input";
 export const SearchInput = () => {
   const router = useRouter();
   const [value, setValue] = useState("");
-  const [debouncedValue] = useDebounceValue(value, 0);
+  const [debouncedValue] = useDebounceValue(value, 1000, {
+    trailing: true,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -39,7 +41,7 @@ export const SearchInput = () => {
         className="w-full max-w-[650px] pl-9 rounded-xl"
         placeholder="Search here"
         onChange={handleChange}
-        value={debouncedValue}
+        value={value}
       />
     </div>
   );
