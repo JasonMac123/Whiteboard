@@ -12,7 +12,7 @@ export const InviteButton = () => {
           <Plus className="h-4 w-4 mr-2" />
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="p-0 bg-transparent border-none max-w-[734px]">
         <OrganizationProfile />
       </DialogContent>
     </Dialog>
