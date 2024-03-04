@@ -11,10 +11,11 @@ import { Input } from "@/components/ui/input";
 
 export const SearchInput = () => {
   const router = useRouter();
-  const [debouncedValue, setDebouncedValue] = useDebounceValue("", 500);
+  const [value, setValue] = useState("");
+  const [debouncedValue] = useDebounceValue(value, 0);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDebouncedValue(e.target.value);
+    setValue(e.target.value);
   };
 
   useEffect(() => {
@@ -27,13 +28,15 @@ export const SearchInput = () => {
       },
       { skipEmptyString: true, skipNull: true }
     );
+
+    router.push(url);
   }, [debouncedValue, router]);
 
   return (
     <div className="w-full relative">
       <Search className="absolute top-1/2 left-3 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
       <Input
-        className="w-full max-w-[650px] pl-9"
+        className="w-full max-w-[650px] pl-9 rounded-xl"
         placeholder="Search here"
         onChange={handleChange}
         value={debouncedValue}
