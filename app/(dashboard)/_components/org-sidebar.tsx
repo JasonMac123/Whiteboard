@@ -19,10 +19,10 @@ export const OrgSidebar = () => {
       <Link href={"/"}>
         <div className="flex items-center gap-x-2">
           <Image
-            src={"../../../public/WhiteBoard.png"}
+            src={"/images/WhiteBoard.png"}
             alt="Logo"
-            height={60}
-            width={60}
+            height={100}
+            width={100}
           />
           <span className={cn("font-semibold text-2xl", font.className)}>
             Whiteboard
