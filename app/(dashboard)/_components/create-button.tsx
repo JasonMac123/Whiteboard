@@ -13,7 +13,7 @@ export const CreateButton = () => {
         <div className="aspect-square">
           <HoverHint label="Create Organization" side="right" sideOffset={20}>
             <button className="bg-white/25 h-full w-full rounded-md flex items-center justify-center opacity-60 hover:opacity-100 transition">
-              <Plus className="text-white" />
+              <Plus className="text-white" size={35} />
             </button>
           </HoverHint>
         </div>
