@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
 
 interface BoardListProps {
@@ -36,7 +37,16 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
   }
 
   if (!data.length) {
-    return <div>No boards</div>;
+    return (
+      <EmptyState
+        image={"/images/noticeboard.png"}
+        attributionLink="https://www.flaticon.com/free-icons/sticky-notes"
+        error="No boards"
+        errorMessage="Create a board first!"
+      >
+        <Button size="lg">Create a board!</Button>
+      </EmptyState>
+    );
   }
 
   return <div></div>;
