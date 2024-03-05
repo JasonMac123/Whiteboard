@@ -5,6 +5,7 @@ import Link from "next/link";
 
 interface EmptyState {
   image: string;
+  altImage: string;
   attributionLink: string;
   error: string;
   errorMessage: string;
@@ -13,6 +14,7 @@ interface EmptyState {
 
 export const EmptyState = ({
   image,
+  altImage,
   attributionLink,
   error,
   errorMessage,
@@ -20,7 +22,7 @@ export const EmptyState = ({
 }: EmptyState) => {
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <Image src={image} height={300} width={300} alt="Empty" />
+      <Image src={image} height={400} width={400} alt={altImage} />
       <Link
         href={attributionLink}
         className="text-xs text-muted-foreground text-neutral-700"

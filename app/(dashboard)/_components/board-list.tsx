@@ -18,6 +18,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     return (
       <EmptyState
         image={"/images/magnifying-glass.png"}
+        altImage="image of magnifying-glass"
         attributionLink="https://www.flaticon.com/free-icons/magnifying-glass"
         error="No searchs found"
         errorMessage="Try searching using another term"
@@ -29,6 +30,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     return (
       <EmptyState
         image={"/images/star.png"}
+        altImage="image of star"
         attributionLink="https://www.flaticon.com/free-icons/star"
         error="No favourites"
         errorMessage="Favourite a board first!"
@@ -40,6 +42,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     return (
       <EmptyState
         image={"/images/noticeboard.png"}
+        altImage="Image of organized sticky notes"
         attributionLink="https://www.flaticon.com/free-icons/sticky-notes"
         error="No boards"
         errorMessage="Create a board first!"
