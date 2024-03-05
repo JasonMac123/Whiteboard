@@ -8,14 +8,9 @@ import { CreateOrganization } from "@clerk/nextjs";
 export const NoOrganization = () => {
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <Image
-        src="/images/noticeboard.png"
-        alt="empty"
-        height={400}
-        width={400}
-      />
+      <Image src="/images/team.png" alt="empty" height={400} width={400} />
       <Link
-        href="https://www.flaticon.com/free-icons/sticky-notes"
+        href="https://www.flaticon.com/free-icons/team"
         className="text-xs text-muted-foreground text-neutral-700"
       >
         @Icon created by Freepik - Flaticon
