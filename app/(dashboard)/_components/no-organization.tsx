@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { CreateOrganization } from "@clerk/nextjs";
 
-export const Empty = () => {
+export const NoOrganization = () => {
   return (
     <div className="h-full flex flex-col items-center justify-center">
       <Image
