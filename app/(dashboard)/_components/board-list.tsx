@@ -47,7 +47,9 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
         error="No boards"
         errorMessage="Create a board first!"
       >
-        <Button size="lg">Create a board!</Button>
+        <div className="mt-6">
+          <Button size="lg">Create a board!</Button>
+        </div>
       </EmptyState>
     );
   }
