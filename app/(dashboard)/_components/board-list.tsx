@@ -1,5 +1,8 @@
 "use client";
 
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
 
@@ -13,6 +16,16 @@ interface BoardListProps {
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
   const data = [];
+
+  const create = useMutation(api.board.create);
+  const onClick = () => {
+    if (!orgId) return;
+
+    create({
+      orgId: orgId,
+      title: "Untitled",
+    });
+  };
 
   if (!data.length && query.search) {
     return (
@@ -48,7 +61,9 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
         errorMessage="Create a board first!"
       >
         <div className="mt-6">
-          <Button size="lg">Create a board!</Button>
+          <Button onClick={onClick} size="lg">
+            Create a board!
+          </Button>
         </div>
       </EmptyState>
     );
