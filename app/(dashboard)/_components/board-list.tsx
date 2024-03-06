@@ -5,6 +5,7 @@ import { api } from "@/convex/_generated/api";
 
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
+import { useApiMutation } from "@/hooks/use-api-mutation";
 
 interface BoardListProps {
   orgId: string;
@@ -16,12 +17,11 @@ interface BoardListProps {
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
   const data = [];
-
-  const create = useMutation(api.board.create);
+  const { mutate, pending } = useApiMutation(api.board.create);
   const onClick = () => {
     if (!orgId) return;
 
-    create({
+    mutate({
       orgId: orgId,
       title: "Untitled",
     });
@@ -61,7 +61,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
         errorMessage="Create a board first!"
       >
         <div className="mt-6">
-          <Button onClick={onClick} size="lg">
+          <Button disabled={pending} onClick={onClick} size="lg">
             Create a board!
           </Button>
         </div>
