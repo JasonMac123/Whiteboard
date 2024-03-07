@@ -25,9 +25,13 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     mutate({
       orgId: orgId,
       title: "Untitled",
-    }).then((id) => {
-      toast.success("Board created");
-    });
+    })
+      .then((id) => {
+        toast.success("Board created");
+      })
+      .catch(() => {
+        toast.error("Failed to create board");
+      });
   };
 
   if (!data.length && query.search) {
