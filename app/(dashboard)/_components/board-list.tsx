@@ -1,11 +1,12 @@
 "use client";
 
-import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
+import { useApiMutation } from "@/hooks/use-api-mutation";
+
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
-import { useApiMutation } from "@/hooks/use-api-mutation";
 
 interface BoardListProps {
   orgId: string;
@@ -24,6 +25,8 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     mutate({
       orgId: orgId,
       title: "Untitled",
+    }).then((id) => {
+      toast.success("Board created");
     });
   };
 
