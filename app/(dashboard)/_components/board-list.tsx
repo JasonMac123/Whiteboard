@@ -1,6 +1,7 @@
 "use client";
 
 import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
 
 import { useApiMutation } from "@/hooks/use-api-mutation";
 
@@ -17,7 +18,8 @@ interface BoardListProps {
 }
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
-  const data = [];
+  const data = useQuery(api.getBoards.get, { orgId });
+
   const { mutate, pending } = useApiMutation(api.board.create);
   const onClick = () => {
     if (!orgId) return;
@@ -33,6 +35,10 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
         toast.error("Failed to create board");
       });
   };
+
+  if (data === undefined) {
+    return <div>Loading</div>;
+  }
 
   if (!data.length && query.search) {
     return (
