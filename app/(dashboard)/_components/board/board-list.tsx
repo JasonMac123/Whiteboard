@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
 import { BoardCard } from "./board-card";
+import { NewBoard } from "./new-board";
 
 interface BoardListProps {
   orgId: string;
@@ -93,6 +94,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
           : "Team Boards"}
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
+        <NewBoard orgId={orgId} />
         {data.map((board) => (
           <BoardCard
             key={board._id}
