@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { formatDistanceToNow } from "date-fns";
+import { useAuth } from "@clerk/nextjs";
+import { BoardFooter } from "./board-footer";
+
 interface BoardCardProps {
   id: string;
   title: string;
@@ -22,6 +26,11 @@ export const BoardCard = ({
   createdAt,
   orgId,
 }: BoardCardProps) => {
+  const { userId } = useAuth();
+
+  const authorLabel = userId === authorId ? "You" : authorName;
+  const dateLabel = formatDistanceToNow(createdAt, { addSuffix: true });
+
   return (
     <Link href={`/board/${id}`}>
       <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
@@ -29,6 +38,11 @@ export const BoardCard = ({
           <Image src={imageUrl} alt={title} fill className="object-fit" />
           <div className="opacity-0 group-hover:opacity-50 transition-opacity h-full w-full bg-black"></div>
         </div>
+        <BoardFooter
+          title={title}
+          authorLabel={authorLabel}
+          dateLabel={dateLabel}
+        />
       </div>
     </Link>
   );
