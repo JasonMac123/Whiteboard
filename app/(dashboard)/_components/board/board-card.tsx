@@ -42,6 +42,9 @@ export const BoardCard = ({
           title={title}
           authorLabel={authorLabel}
           dateLabel={dateLabel}
+          favourite={false}
+          onClick={() => {}}
+          disabled={false}
         />
       </div>
     </Link>
