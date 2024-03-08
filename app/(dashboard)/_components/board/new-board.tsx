@@ -14,7 +14,7 @@ export const NewBoard = ({ orgId, disabled }: NewBaordProps) => {
       disabled={disabled}
       onClick={() => {}}
       className={cn(
-        "col-span-1 aspect-[100/127] bg-blue-600 rounded-lg hover:bg-blue-800 flex flex-col items-center justify-center py-6",
+        "col-span-1 aspect-[100/127] bg-sky-400 rounded-lg hover:bg-sky-700 flex flex-col items-center justify-center py-6",
         disabled && "opacity-75"
       )}
     >
