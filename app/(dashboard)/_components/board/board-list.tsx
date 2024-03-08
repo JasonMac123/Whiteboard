@@ -8,6 +8,7 @@ import { useApiMutation } from "@/hooks/use-api-mutation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
+import { BoardCard } from "./board-card";
 
 interface BoardListProps {
   orgId: string;
@@ -82,5 +83,29 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     );
   }
 
-  return <div></div>;
+  return (
+    <div>
+      <h3 className="text-4xl">
+        {query.favourites
+          ? "Favourites Boards"
+          : query.search
+          ? `Search result for boards ${query.search}`
+          : "Team Boards"}
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
+        {data.map((board) => (
+          <BoardCard
+            key={board._id}
+            id={board._id}
+            title={board.title}
+            imageUrl={board.imageUrl}
+            authorId={board.authorId}
+            authorName={board.authorName}
+            createdAt={board._creationTime}
+            orgId={board.orgId}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
