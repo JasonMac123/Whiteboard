@@ -44,6 +44,7 @@ export const ActionMenu = ({
       >
         <DropdownMenuItem className="p-3 cursor-pointer" onClick={onCopyLink}>
           <Link2 className="h-4 w-4 mr-2" />
+          Copy Board Link
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
