@@ -39,7 +39,25 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
   };
 
   if (data === undefined) {
-    return <div>Loading</div>;
+    return (
+      <div>
+        <h3 className="text-4xl">
+          {query.favourites
+            ? "Favourites Boards"
+            : query.search
+            ? `Search result for boards ${query.search}`
+            : "Team Boards"}
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
+          <NewBoard orgId={orgId} disabled />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+          <BoardCard.Skeleton />
+        </div>
+      </div>
+    );
   }
 
   if (!data.length && query.search) {
