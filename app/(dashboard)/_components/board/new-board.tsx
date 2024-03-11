@@ -38,7 +38,8 @@ export const NewBoard = ({ orgId, disabled }: NewBaordProps) => {
       onClick={onClick}
       className={cn(
         "col-span-1 aspect-[100/127] bg-sky-400 rounded-lg hover:bg-sky-700 flex flex-col items-center justify-center py-6 transition",
-        (pending || disabled) && "opacity-75"
+        (pending || disabled) &&
+          "opacity-75 hover:bg-sky-700 cursor-not-allowed"
       )}
     >
       <div />
