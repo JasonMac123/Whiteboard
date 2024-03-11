@@ -13,7 +13,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
-import { ConfirmDialog } from "./confirm-dialog-";
+import { ConfirmDialog } from "./confirm-dialog";
 import { Button } from "./ui/button";
 
 interface ActionMenuProps {

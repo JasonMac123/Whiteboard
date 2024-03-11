@@ -2,14 +2,14 @@ import { create } from "zustand";
 
 const defaultValues = { id: "", title: "" };
 
-interface RenameModalStore {
+interface RenameDialogStore {
   isOpen: boolean;
   initialValues: typeof defaultValues;
   onOpen: (id: string, title: string) => void;
   onClose: () => void;
 }
 
-export const useRenameModal = create<RenameModalStore>((set) => ({
+export const useRenameDialog = create<RenameDialogStore>((set) => ({
   isOpen: false,
   onOpen: (id, title) =>
     set({
