@@ -13,6 +13,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
+import { ConfirmDialog } from "./confirm-dialog-";
+import { Button } from "./ui/button";
 
 interface ActionMenuProps {
   children: React.ReactNode;
@@ -57,10 +59,17 @@ export const ActionMenu = ({
           <Link2 className="h-4 w-4 mr-2" />
           Copy Board Link
         </DropdownMenuItem>
-        <DropdownMenuItem className="p-3 cursor-pointer" onClick={onDelete}>
-          <Trash2 className="h-4 w-4 mr-2" />
-          Delete Board
-        </DropdownMenuItem>
+        <ConfirmDialog
+          header="Delete board?"
+          description="This will delete the board and its content forever"
+          disabled={pending}
+          onConfirm={onDelete}
+        >
+          <Button className="p-3 cursor-pointer text-sm w-full justify-start font-normal">
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete Board
+          </Button>
+        </ConfirmDialog>
       </DropdownMenuContent>
     </DropdownMenu>
   );
