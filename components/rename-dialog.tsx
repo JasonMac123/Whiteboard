@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FormEventHandler, useState } from "react";
+import { toast } from "sonner";
 
 import { useRenameDialog } from "@/store/rename-dialog";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { api } from "@/convex/_generated/api";
+
 import {
   Dialog,
   DialogContent,
@@ -16,11 +20,25 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
 export const RenameDialog = () => {
+  const { mutate, pending } = useApiMutation(api.board.update);
+
   const { isOpen, onClose, initialValues } = useRenameDialog();
 
   const [title, setTitle] = useState(initialValues.title);
 
-  const onSubmit = () => {};
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    mutate({
+      id: initialValues.id,
+      title,
+    })
+      .then(() => {
+        toast.success("Board renamed");
+        onClose();
+      })
+      .catch(() => toast.error("Failed to rename board"));
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
