@@ -39,36 +39,7 @@ export const remove = mutation({
   },
 });
 
-export const update = mutation({
-  args: { id: v.id("boards"), title: v.string() },
-  handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-
-    if (!identity) {
-      throw new Error("Unauthorized");
-    }
-
-    const title = args.title.trim();
-
-    if (!title) {
-      throw new Error("Title is required");
-    }
-
-    if (title.length < 8 || title.length > 50) {
-      throw new Error(
-        "Minimum title length is 8 characters and maximum title length is 50 characters"
-      );
-    }
-
-    const board = await ctx.db.patch(args.id, {
-      title: args.title,
-    });
-
-    return board;
-  },
-});
-
-export const favourite = mutation({
+export const unfavourite = mutation({
   args: { id: v.id("boards"), orgId: v.string() },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -92,15 +63,11 @@ export const favourite = mutation({
       )
       .unique();
 
-    if (userFavourites) {
-      throw new Error("Board already favourited");
+    if (!userFavourites) {
+      throw new Error("Favourited board not found");
     }
 
-    await ctx.db.insert("userFavourites", {
-      userId,
-      boardId: board._id,
-      orgId: args.orgId,
-    });
+    await ctx.db.delete(userFavourites._id);
 
     return board;
   },
