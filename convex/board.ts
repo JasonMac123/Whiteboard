@@ -59,7 +59,7 @@ export const unfavourite = mutation({
     const userFavourites = await ctx.db
       .query("userFavourites")
       .withIndex("by_user_board_org", (q) =>
-        q.eq("boardId", board._id).eq("orgId", args.orgId).eq("userId", userId)
+        q.eq("boardId", board._id).eq("orgId", board.orgId).eq("userId", userId)
       )
       .unique();
 
