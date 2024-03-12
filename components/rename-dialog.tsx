@@ -51,7 +51,7 @@ export const RenameDialog = () => {
         </DialogDescription>
         <form onSubmit={onSubmit} className="space-y-4">
           <Input
-            disabled={false}
+            disabled={pending}
             required
             maxLength={50}
             value={title}
