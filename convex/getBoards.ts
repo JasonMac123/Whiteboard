@@ -18,6 +18,20 @@ export const get = query({
       .order("desc")
       .collect();
 
-    return boards;
+    const boardsWithFavourites = boards.map((board) => {
+      return ctx.db
+        .query("userFavourites")
+        .withIndex("by_user_board", (q) =>
+          q.eq("userId", identity.subject).eq("boardId", board._id)
+        )
+        .unique()
+        .then((favourite) => {
+          return { ...board, isFavourite: !!favourite };
+        });
+    });
+
+    const boardWithFavouritePromise = Promise.all(boardsWithFavourites);
+
+    return boardWithFavouritePromise;
   },
 });
