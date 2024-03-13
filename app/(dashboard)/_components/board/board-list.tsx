@@ -30,7 +30,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
       orgId: orgId,
       title: "Untitled",
     })
-      .then((id) => {
+      .then(() => {
         toast.success("Board created");
       })
       .catch(() => {

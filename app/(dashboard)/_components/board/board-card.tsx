@@ -51,13 +51,21 @@ export const BoardCard = ({
 
   const toggleFavourite = () => {
     if (isFavourited) {
-      mutateUnfavourite({ id: id as Id<"boards">, orgId }).catch(() => {
-        toast.error("Failed to unfavourite");
-      });
+      mutateUnfavourite({ id: id as Id<"boards">, orgId })
+        .then(() => {
+          toast.success("Board unfavourited");
+        })
+        .catch(() => {
+          toast.error("Failed to unfavourite");
+        });
     } else {
-      mutateFavourite({ id: id as Id<"boards">, orgId }).catch(() => {
-        toast.error("Failed to favourite");
-      });
+      mutateFavourite({ id: id as Id<"boards">, orgId })
+        .then(() => {
+          toast.success("Board favourited");
+        })
+        .catch(() => {
+          toast.error("Failed to favourite");
+        });
     }
   };
 
@@ -77,7 +85,7 @@ export const BoardCard = ({
           title={title}
           authorLabel={authorLabel}
           dateLabel={dateLabel}
-          favourite={false}
+          favourite={isFavourited}
           toggleFavourite={toggleFavourite}
           disabled={pendingFavourite || pendingUnfavourite}
         />
