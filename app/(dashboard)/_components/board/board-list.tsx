@@ -20,7 +20,7 @@ interface BoardListProps {
 }
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
-  const data = useQuery(api.getBoards.get, { orgId });
+  const data = useQuery(api.getBoards.get, { orgId, ...query });
 
   const { mutate, pending } = useApiMutation(api.board.create);
   const onClick = () => {
