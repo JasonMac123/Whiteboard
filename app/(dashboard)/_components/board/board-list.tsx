@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
 import { BoardCard } from "./board-card";
 import { NewBoard } from "./new-board";
+import { useRouter } from "next/navigation";
 
 interface BoardListProps {
   orgId: string;
@@ -20,6 +21,7 @@ interface BoardListProps {
 }
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
+  const router = useRouter();
   const data = useQuery(api.getBoards.get, { orgId, ...query });
 
   const { mutate, pending } = useApiMutation(api.board.create);
@@ -30,8 +32,9 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
       orgId: orgId,
       title: "Untitled",
     })
-      .then(() => {
+      .then((id) => {
         toast.success("Board created");
+        router.push(`/board/${id}`);
       })
       .catch(() => {
         toast.error("Failed to create board");
