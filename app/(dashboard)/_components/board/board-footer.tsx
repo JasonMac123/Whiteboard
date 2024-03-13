@@ -6,7 +6,7 @@ interface BoardFooterProps {
   authorLabel: string;
   dateLabel: string;
   favourite: boolean;
-  onClick: () => void;
+  toggleFavourite: () => void;
   disabled: boolean;
 }
 
@@ -15,9 +15,17 @@ export const BoardFooter = ({
   authorLabel,
   dateLabel,
   favourite,
-  onClick,
+  toggleFavourite,
   disabled,
 }: BoardFooterProps) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+    toggleFavourite();
+  };
+
   return (
     <div className="relative bg-white p-3">
       <p className="text-[13px] truncate max-w-[calc(100%-20px)]">{title}</p>
@@ -26,7 +34,7 @@ export const BoardFooter = ({
       </p>
       <button
         disabled={disabled}
-        onClick={onClick}
+        onClick={handleClick}
         className={cn(
           "opacity-0 group-hover:opacity-100 transition absoolute top-3 right-3 text-muted-foreground hover:text-yellow-600",
           favourite && "fill-yellow-600 text-yellow-600"
