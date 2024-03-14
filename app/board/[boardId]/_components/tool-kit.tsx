@@ -1,3 +1,5 @@
+import { Skeleton } from "@/components/ui/skeleton";
+
 export const ToolKit = () => {
   return (
     <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
@@ -9,6 +11,14 @@ export const ToolKit = () => {
         <div>Undo</div>
         <div>Redo</div>
       </div>
+    </div>
+  );
+};
+
+ToolKit.Skeleton = function ToolKitSkeleton() {
+  return (
+    <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4 bg-white h-[400px] w-[60px]">
+      <Skeleton className="h-full w-full bg-muted-400" />
     </div>
   );
 };
