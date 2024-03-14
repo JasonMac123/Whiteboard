@@ -1,4 +1,5 @@
 import { WhiteBoard } from "./_components/whiteboard";
+import { WhiteBoardRoom } from "@/components/whiteboard-room";
 
 interface BoardIdPageProps {
   params: {
@@ -7,7 +8,11 @@ interface BoardIdPageProps {
 }
 
 const BoardIdPage = ({ params }: BoardIdPageProps) => {
-  return <WhiteBoard boardId={params.boardId} />;
+  return (
+    <WhiteBoardRoom roomId={params.boardId} fallback={<div></div>}>
+      <WhiteBoard boardId={params.boardId} />
+    </WhiteBoardRoom>
+  );
 };
 
 export default BoardIdPage;
