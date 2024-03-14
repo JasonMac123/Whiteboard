@@ -1,7 +1,13 @@
 import { WhiteBoard } from "./_components/whiteboard";
 
-const BoardIdPage = () => {
-  return <WhiteBoard />;
+interface BoardIdPageProps {
+  params: {
+    boardId: string;
+  };
+}
+
+const BoardIdPage = ({ params }: BoardIdPageProps) => {
+  return <WhiteBoard boardId={params.boardId} />;
 };
 
 export default BoardIdPage;
