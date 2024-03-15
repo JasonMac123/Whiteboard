@@ -15,7 +15,7 @@ export const ToolKit = () => {
   );
 };
 
-ToolKit.Skeleton = function ToolKitSkeleton() {
+export const ToolKitSkeleton = () => {
   return (
     <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4 bg-white h-[400px] w-[60px]">
       <Skeleton className="h-full w-full bg-muted-400" />
