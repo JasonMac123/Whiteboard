@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -33,12 +34,17 @@ export const ActionMenu = ({
   id,
   title,
 }: ActionMenuProps) => {
+  const router = useRouter();
+
   const { onOpen } = useRenameDialog();
   const { mutate, pending } = useApiMutation(api.board.remove);
 
   const onDelete = () => {
     mutate({ id })
-      .then(() => toast.success("Board deleted"))
+      .then(() => {
+        router.push("/");
+        toast.success("Board deleted");
+      })
       .catch(() => toast.error("Failed to delete board"));
   };
 
