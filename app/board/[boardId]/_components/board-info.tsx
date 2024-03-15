@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Menu } from "lucide-react";
 import { useQuery } from "convex/react";
 
 import { api } from "@/convex/_generated/api";
@@ -10,6 +11,7 @@ import { useRenameDialog } from "@/store/rename-dialog";
 
 import { Button } from "@/components/ui/button";
 import { HoverHint } from "@/components/hover-hint";
+import { ActionMenu } from "@/components/action-menu";
 
 interface BoardInfoProps {
   boardId: string;
@@ -46,13 +48,25 @@ export const BoardInfo = ({ boardId }: BoardInfoProps) => {
         </Button>
       </HoverHint>
       <TabSeperator />
-      <Button
-        variant={"board"}
-        className="text-base font-normal px-2"
-        onClick={() => onOpen(data._id, data.title)}
-      >
-        {data.title}
-      </Button>
+      <HoverHint label="Edit board title" side="bottom" sideOffset={12}>
+        <Button
+          variant={"board"}
+          className="text-base font-normal px-2"
+          onClick={() => onOpen(data._id, data.title)}
+        >
+          {data.title}
+        </Button>
+      </HoverHint>
+      <TabSeperator />
+      <ActionMenu id={data._id} title={data.title} side="bottom">
+        <div>
+          <HoverHint label="Board options" side="bottom" sideOffset={12}>
+            <Button size="icon" variant={"board"}>
+              <Menu />
+            </Button>
+          </HoverHint>
+        </div>
+      </ActionMenu>
     </div>
   );
 };
