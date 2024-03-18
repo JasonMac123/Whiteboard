@@ -50,6 +50,10 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     []
   );
 
+  const onPointerLeave = useMutation(({ setMyPresence }) => {
+    setMyPresence({ cursor: null });
+  }, []);
+
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
       <BoardInfo boardId={boardId} />
@@ -66,6 +70,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         className="h-[100vh] g-[100vw]"
         onWheel={onWheel}
         onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
       >
         <g>
           <CursorPresence />
