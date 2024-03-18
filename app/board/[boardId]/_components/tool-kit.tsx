@@ -1,15 +1,70 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { ToolButton } from "./tool-button";
+import {
+  Circle,
+  MousePointer2,
+  Pencil,
+  Redo2,
+  Square,
+  StickyNote,
+  Type,
+  Undo2,
+} from "lucide-react";
 
 export const ToolKit = () => {
   return (
     <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
       <div className="bg-white roudned-md p-1.5 flex gap-y-1 flex-col items-center shadow-md">
-        <div>Draw</div>
-        <div>Create</div>
+        <ToolButton
+          label="Select"
+          icon={MousePointer2}
+          onClick={() => {}}
+          active={false}
+        />
+        <ToolButton
+          label="Pen"
+          icon={Pencil}
+          onClick={() => {}}
+          active={false}
+        />
+        <ToolButton
+          label="Text"
+          icon={Type}
+          onClick={() => {}}
+          active={false}
+        />
+        <ToolButton
+          label="Sticky Note"
+          icon={StickyNote}
+          onClick={() => {}}
+          active={false}
+        />
+        <ToolButton
+          label="Rectangle"
+          icon={Square}
+          onClick={() => {}}
+          active={false}
+        />
+        <ToolButton
+          label="Ellipse"
+          icon={Circle}
+          onClick={() => {}}
+          active={false}
+        />
       </div>
       <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">
-        <div>Undo</div>
-        <div>Redo</div>
+        <ToolButton
+          label="Undo"
+          icon={Undo2}
+          onClick={() => {}}
+          disabled={false}
+        />
+        <ToolButton
+          label="Redo"
+          icon={Redo2}
+          onClick={() => {}}
+          disabled={false}
+        />
       </div>
     </div>
   );
