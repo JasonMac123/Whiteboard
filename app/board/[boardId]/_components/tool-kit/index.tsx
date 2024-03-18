@@ -11,7 +11,7 @@ import {
   Undo2,
 } from "lucide-react";
 
-import { CanvasState } from "@/types/canvas";
+import { CanvasMode, CanvasState } from "@/types/canvas";
 
 interface ToolKitProps {
   canvasState: CanvasState;
@@ -36,8 +36,8 @@ export const ToolKit = ({
         <ToolButton
           label="Select"
           icon={MousePointer2}
-          onClick={() => {}}
-          active={false}
+          onClick={() => setCanvasState({ mode: CanvasMode.None })}
+          active={canvasState.mode === CanvasMode.None}
         />
         <ToolButton
           label="Pen"
