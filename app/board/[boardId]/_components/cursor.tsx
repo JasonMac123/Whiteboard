@@ -24,10 +24,13 @@ export const Cursor = memo(({ connectionId }: CursorProps) => {
     <foreignObject
       style={{ transform: `translateX(${x}px) translateY(${y}px)` }}
       height={50}
-      width={50}
+      width={name.length * 10 + 30}
       className="relative drop-shadow-md"
     >
       <MousePointer2 className="h-5 w-5 fill-sky-400 text-sky-400" />
+      <div className="absolute left-4 px-1.5 py-0.5 rounded-md text-xs text-white font-semibold bg-sky-400">
+        {name}
+      </div>
     </foreignObject>
   );
 });
