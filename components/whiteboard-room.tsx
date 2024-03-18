@@ -18,7 +18,7 @@ export const WhiteBoardRoom = ({
   fallback,
 }: WhiteBoardRoomProps) => {
   return (
-    <RoomProvider id={roomId} initialPresence={{}}>
+    <RoomProvider id={roomId} initialPresence={{ cursor: null }}>
       <ClientSideSuspense fallback={<WhiteBoardLoading />}>
         {() => children}
       </ClientSideSuspense>
