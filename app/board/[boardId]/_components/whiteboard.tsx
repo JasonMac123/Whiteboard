@@ -2,7 +2,7 @@
 
 import { BoardInfo } from "./board-info";
 import { BoardMembers } from "./board-members";
-import { ToolKit } from "./tool-kit";
+import { ToolKit } from "./tool-kit/index";
 
 import { useSelf } from "@/liveblocks.config";
 
@@ -11,11 +11,9 @@ interface WhiteBoardProps {
 }
 
 export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
-  const info = useSelf((me) => me.info);
-
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
-      <BoardInfo />
+      <BoardInfo boardId={boardId} />
       <BoardMembers />
       <ToolKit />
     </main>
