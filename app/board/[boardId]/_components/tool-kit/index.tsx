@@ -11,12 +11,12 @@ import {
   Undo2,
 } from "lucide-react";
 
-import { CanvasMode, CanvasState } from "@/types/canvas";
+import { WhiteBoardMode, WhiteBoardState } from "@/types/whiteboard";
 import { LayerType } from "@/types/layer";
 
 interface ToolKitProps {
-  canvasState: CanvasState;
-  setCanvasState: (newState: CanvasState) => void;
+  WhiteBoardState: WhiteBoardState;
+  setWhiteBoardState: (newState: WhiteBoardState) => void;
   undo: () => void;
   redo: () => void;
   canUndo: boolean;
@@ -24,8 +24,8 @@ interface ToolKitProps {
 }
 
 export const ToolKit = ({
-  canvasState,
-  setCanvasState,
+  WhiteBoardState,
+  setWhiteBoardState,
   undo,
   redo,
   canUndo,
@@ -37,75 +37,75 @@ export const ToolKit = ({
         <ToolButton
           label="Select"
           icon={MousePointer2}
-          onClick={() => setCanvasState({ mode: CanvasMode.None })}
+          onClick={() => setWhiteBoardState({ mode: WhiteBoardMode.None })}
           active={
-            canvasState.mode === CanvasMode.None ||
-            canvasState.mode === CanvasMode.Translating ||
-            canvasState.mode === CanvasMode.SelectionNet ||
-            canvasState.mode === CanvasMode.Pressing ||
-            canvasState.mode === CanvasMode.Resizing
+            WhiteBoardState.mode === WhiteBoardMode.None ||
+            WhiteBoardState.mode === WhiteBoardMode.Translating ||
+            WhiteBoardState.mode === WhiteBoardMode.SelectionNet ||
+            WhiteBoardState.mode === WhiteBoardMode.Pressing ||
+            WhiteBoardState.mode === WhiteBoardMode.Resizing
           }
         />
         <ToolButton
           label="Pen"
           icon={Pencil}
-          onClick={() => setCanvasState({ mode: CanvasMode.Pencil })}
-          active={canvasState.mode === CanvasMode.Pencil}
+          onClick={() => setWhiteBoardState({ mode: WhiteBoardMode.Pencil })}
+          active={WhiteBoardState.mode === WhiteBoardMode.Pencil}
         />
         <ToolButton
           label="Text"
           icon={Type}
           onClick={() =>
-            setCanvasState({
-              mode: CanvasMode.Inserting,
+            setWhiteBoardState({
+              mode: WhiteBoardMode.Inserting,
               layerType: LayerType.Text,
             })
           }
           active={
-            canvasState.mode === CanvasMode.Inserting &&
-            canvasState.layerType === LayerType.Text
+            WhiteBoardState.mode === WhiteBoardMode.Inserting &&
+            WhiteBoardState.layerType === LayerType.Text
           }
         />
         <ToolButton
           label="Sticky Note"
           icon={StickyNote}
           onClick={() =>
-            setCanvasState({
-              mode: CanvasMode.Inserting,
+            setWhiteBoardState({
+              mode: WhiteBoardMode.Inserting,
               layerType: LayerType.Note,
             })
           }
           active={
-            canvasState.mode === CanvasMode.Inserting &&
-            canvasState.layerType === LayerType.Note
+            WhiteBoardState.mode === WhiteBoardMode.Inserting &&
+            WhiteBoardState.layerType === LayerType.Note
           }
         />
         <ToolButton
           label="Rectangle"
           icon={Square}
           onClick={() =>
-            setCanvasState({
-              mode: CanvasMode.Inserting,
+            setWhiteBoardState({
+              mode: WhiteBoardMode.Inserting,
               layerType: LayerType.Rectangle,
             })
           }
           active={
-            canvasState.mode === CanvasMode.Inserting &&
-            canvasState.layerType === LayerType.Rectangle
+            WhiteBoardState.mode === WhiteBoardMode.Inserting &&
+            WhiteBoardState.layerType === LayerType.Rectangle
           }
         />
         <ToolButton
           label="Ellipse"
           icon={Circle}
           onClick={() =>
-            setCanvasState({
-              mode: CanvasMode.Inserting,
+            setWhiteBoardState({
+              mode: WhiteBoardMode.Inserting,
               layerType: LayerType.Ellipse,
             })
           }
           active={
-            canvasState.mode === CanvasMode.Inserting &&
-            canvasState.layerType === LayerType.Ellipse
+            WhiteBoardState.mode === WhiteBoardMode.Inserting &&
+            WhiteBoardState.layerType === LayerType.Ellipse
           }
         />
       </div>

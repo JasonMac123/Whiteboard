@@ -2,6 +2,7 @@ import { LayerType } from "./layer";
 
 export type Point = {
   x: number;
+  y: number;
 };
 
 export type XYWH = {
@@ -18,25 +19,25 @@ export enum Side {
   Right = 8,
 }
 
-export type CanvasState =
+export type WhiteBoardState =
   | {
-      mode: CanvasMode.None;
+      mode: WhiteBoardMode.None;
     }
   | {
-      mode: CanvasMode.Pressing;
+      mode: WhiteBoardMode.Pressing;
       origin: Point;
     }
   | {
-      mode: CanvasMode.SelectionNet;
+      mode: WhiteBoardMode.SelectionNet;
       origin: Point;
       current?: Point;
     }
   | {
-      mode: CanvasMode.Translating;
+      mode: WhiteBoardMode.Translating;
       current: Point;
     }
   | {
-      mode: CanvasMode.Inserting;
+      mode: WhiteBoardMode.Inserting;
       layerType:
         | LayerType.Ellipse
         | LayerType.Rectangle
@@ -44,15 +45,15 @@ export type CanvasState =
         | LayerType.Note;
     }
   | {
-      mode: CanvasMode.Resizing;
+      mode: WhiteBoardMode.Resizing;
       intialBounds: XYWH;
       corner: Side;
     }
   | {
-      mode: CanvasMode.Pencil;
+      mode: WhiteBoardMode.Pencil;
     };
 
-export enum CanvasMode {
+export enum WhiteBoardMode {
   None,
   Pressing,
   SelectionNet,

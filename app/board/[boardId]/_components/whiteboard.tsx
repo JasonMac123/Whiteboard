@@ -1,9 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-
-import { CanvasMode, CanvasState } from "@/types/canvas";
-
+import { nanoid } from "nanoid";
 import {
   useHistory,
   useCanRedo,
@@ -11,8 +9,11 @@ import {
   useMutation,
   useStorage,
 } from "@/liveblocks.config";
+import { LiveObject } from "@liveblocks/client";
 
-import { Camera, Colour } from "@/types/layer";
+import { Camera, Colour, LayerType } from "@/types/layer";
+import { WhiteBoardMode, Point, WhiteBoardState } from "@/types/whiteboard";
+
 import { pointerEventToCanvasPoint } from "@/lib/pointerEventToCanvas";
 
 import { BoardInfo } from "./board-info";
@@ -27,8 +28,8 @@ interface WhiteBoardProps {
 export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
   const layerIds = useStorage((root) => root.layerIds);
 
-  const [canvasState, setCanvasState] = useState<CanvasState>({
-    mode: CanvasMode.None,
+  const [whiteboardState, setWhiteboardState] = useState<WhiteBoardState>({
+    mode: WhiteBoardMode.None,
   });
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
   const [lastColour, setLastColour] = useState<Colour>({ r: 0, g: 0, b: 0 });
@@ -36,6 +37,36 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  const insertLayer = useMutation(
+    (
+      { storage, setMyPresence },
+      layerType:
+        | LayerType.Ellipse
+        | LayerType.Rectangle
+        | LayerType.Text
+        | LayerType.Note,
+      position: Point
+    ) => {
+      const liveLayers = storage.get("layers");
+      if (liveLayers.size >= 90) {
+        return;
+      }
+
+      const liveLayersIds = storage.get("layerIds");
+      const layerId = nanoid();
+
+      const layer = new LiveObject({
+        type: layerType,
+        x: position.x,
+        y: position.y,
+        height: 100,
+        width: 100,
+        fill: lastColour,
+      });
+    },
+    []
+  );
 
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
@@ -63,8 +94,8 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       <BoardInfo boardId={boardId} />
       <BoardMembers />
       <ToolKit
-        canvasState={canvasState}
-        setCanvasState={setCanvasState}
+        WhiteBoardState={whiteboardState}
+        setWhiteBoardState={setWhiteboardState}
         canRedo={canRedo}
         canUndo={canUndo}
         undo={history.undo}
