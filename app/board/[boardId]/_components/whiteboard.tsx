@@ -72,7 +72,11 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
       >
-        <g>
+        <g
+          style={{
+            transform: `translate(${camera.x}px, ${camera.y}px)`,
+          }}
+        >
           <CursorPresence />
         </g>
       </svg>
