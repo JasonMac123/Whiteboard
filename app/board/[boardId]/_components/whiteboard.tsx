@@ -9,9 +9,10 @@ import {
   useCanRedo,
   useCanUndo,
   useMutation,
+  useStorage,
 } from "@/liveblocks.config";
 
-import { Camera } from "@/types/layer";
+import { Camera, Colour } from "@/types/layer";
 import { pointerEventToCanvasPoint } from "@/lib/pointerEventToCanvas";
 
 import { BoardInfo } from "./board-info";
@@ -24,10 +25,13 @@ interface WhiteBoardProps {
 }
 
 export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
+  const layerIds = useStorage((root) => root.layerIds);
+
   const [canvasState, setCanvasState] = useState<CanvasState>({
     mode: CanvasMode.None,
   });
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
+  const [lastColour, setLastColour] = useState<Colour>({ r: 0, g: 0, b: 0 });
 
   const history = useHistory();
   const canUndo = useCanUndo();

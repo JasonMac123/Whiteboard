@@ -4,7 +4,9 @@ import { ReactNode } from "react";
 import { ClientSideSuspense } from "@liveblocks/react";
 
 import { RoomProvider } from "@/liveblocks.config";
-import { WhiteBoardLoading } from "@/app/board/[boardId]/_components/whiteboard-loading";
+import { LiveMap, LiveObject, LiveList } from "@liveblocks/client";
+
+import { Layer } from "@/types/layer";
 
 interface WhiteBoardRoomProps {
   children: ReactNode;
@@ -18,8 +20,15 @@ export const WhiteBoardRoom = ({
   fallback,
 }: WhiteBoardRoomProps) => {
   return (
-    <RoomProvider id={roomId} initialPresence={{ cursor: null }}>
-      <ClientSideSuspense fallback={<WhiteBoardLoading />}>
+    <RoomProvider
+      id={roomId}
+      initialPresence={{ cursor: null }}
+      initialStorage={{
+        layers: new LiveMap<string, LiveObject<Layer>>(),
+        layerIds: new LiveList(),
+      }}
+    >
+      <ClientSideSuspense fallback={fallback}>
         {() => children}
       </ClientSideSuspense>
     </RoomProvider>

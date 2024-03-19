@@ -1,4 +1,4 @@
-export type Color = {
+export type Colour = {
   r: number;
   g: number;
   b: number;
@@ -8,6 +8,13 @@ export type Camera = {
   x: number;
   y: number;
 };
+
+export type Layer =
+  | RectangleLayer
+  | EllipseLayer
+  | PathLayer
+  | TextLayer
+  | NoteLayer;
 
 export enum LayerType {
   Rectangle,
@@ -23,7 +30,7 @@ export type RectangleLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Color;
+  fill: Colour;
   value?: string;
 };
 
@@ -33,7 +40,7 @@ export type EllipseLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Color;
+  fill: Colour;
   value?: string;
 };
 
@@ -43,7 +50,7 @@ export type PathLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Color;
+  fill: Colour;
   points: number[][];
   value?: string;
 };
@@ -54,7 +61,7 @@ export type TextLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Color;
+  fill: Colour;
   value?: string;
 };
 
@@ -64,6 +71,6 @@ export type NoteLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Color;
+  fill: Colour;
   value?: string;
 };
