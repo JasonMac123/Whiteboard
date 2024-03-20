@@ -57,15 +57,21 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       const layerId = nanoid();
 
       const layer = new LiveObject({
-        type: layerType,
+        type: layerType as number,
         x: position.x,
         y: position.y,
         height: 100,
         width: 100,
         fill: lastColour,
       });
+
+      liveLayersIds.push(layerId);
+      liveLayers.set(layerId, layer);
+
+      setMyPresence({ selection: [layerId] }, { addToHistory: true });
+      setWhiteboardState({ mode: WhiteBoardMode.None });
     },
-    []
+    [lastColour]
   );
 
   const onWheel = useCallback((e: React.WheelEvent) => {

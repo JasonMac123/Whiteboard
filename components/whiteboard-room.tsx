@@ -22,7 +22,7 @@ export const WhiteBoardRoom = ({
   return (
     <RoomProvider
       id={roomId}
-      initialPresence={{ cursor: null }}
+      initialPresence={{ cursor: null, selection: [] }}
       initialStorage={{
         layers: new LiveMap<string, LiveObject<Layer>>(),
         layerIds: new LiveList(),
