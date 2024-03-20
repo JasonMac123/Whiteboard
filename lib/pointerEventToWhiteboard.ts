@@ -1,6 +1,6 @@
 import { Camera } from "@/types/layer";
 
-export function pointerEventToCanvasPoint(
+export function pointerEventToWhiteboardPoint(
   e: React.PointerEvent,
   camera: Camera
 ) {
