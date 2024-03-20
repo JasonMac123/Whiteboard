@@ -14,7 +14,7 @@ import { LiveObject } from "@liveblocks/client";
 import { Camera, Colour, LayerType } from "@/types/layer";
 import { WhiteBoardMode, Point, WhiteBoardState } from "@/types/whiteboard";
 
-import { pointerEventToCanvasPoint } from "@/lib/pointerEventToCanvas";
+import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 
 import { BoardInfo } from "./board-info";
 import { BoardMembers } from "./board-members";
@@ -85,7 +85,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     ({ setMyPresence }, e: React.PointerEvent) => {
       e.preventDefault();
 
-      const current = pointerEventToCanvasPoint(e, camera);
+      const current = pointerEventToWhiteboardPoint(e, camera);
       setMyPresence({ cursor: current });
     },
     []
@@ -94,6 +94,23 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
   const onPointerLeave = useMutation(({ setMyPresence }) => {
     setMyPresence({ cursor: null });
   }, []);
+
+  const onPointerUp = useMutation(
+    ({}, e) => {
+      const point = pointerEventToWhiteboardPoint(e, camera);
+
+      if (whiteboardState.mode === WhiteBoardMode.Inserting) {
+        insertLayer(whiteboardState.layerType, point);
+      } else {
+        setWhiteboardState({
+          mode: WhiteBoardMode.None,
+        });
+      }
+
+      history.resume();
+    },
+    [camera, whiteboardState, history, insertLayer]
+  );
 
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
