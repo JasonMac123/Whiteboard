@@ -20,7 +20,7 @@ import { BoardInfo } from "./board-info";
 import { BoardMembers } from "./board-members";
 import { ToolKit } from "./tool-kit/index";
 import { CursorPresence } from "./cursor-presence";
-import { LayerPreview } from "./layer-preview";
+import { LayerPreview } from "./layers/layer-preview";
 
 interface WhiteBoardProps {
   boardId: string;
