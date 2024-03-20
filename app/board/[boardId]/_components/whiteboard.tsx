@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { nanoid } from "nanoid";
 import {
   useHistory,
@@ -8,6 +8,7 @@ import {
   useCanUndo,
   useMutation,
   useStorage,
+  useOthersMapped,
 } from "@/liveblocks.config";
 import { LiveObject } from "@liveblocks/client";
 
@@ -21,6 +22,7 @@ import { BoardMembers } from "./board-members";
 import { ToolKit } from "./tool-kit/index";
 import { CursorPresence } from "./cursor-presence";
 import { LayerPreview } from "./layers/layer-preview";
+import { randomColourToId } from "@/lib/utils";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -112,6 +114,21 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     },
     [camera, whiteboardState, history, insertLayer]
   );
+
+  const selections = useOthersMapped((id) => id.presence.selection);
+  const layerIdsToColour = useMemo(() => {
+    const layerIdsToColour: Record<string, string> = {};
+
+    for (const user of selections) {
+      const [connectionId, selection] = user;
+
+      for (const layerId of selection) {
+        layerIdsToColour[layerId] = randomColourToId(connectionId);
+      }
+    }
+
+    return layerIdsToColour;
+  }, [selections]);
 
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
