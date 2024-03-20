@@ -20,6 +20,7 @@ import { BoardInfo } from "./board-info";
 import { BoardMembers } from "./board-members";
 import { ToolKit } from "./tool-kit/index";
 import { CursorPresence } from "./cursor-presence";
+import { LayerPreview } from "./layer-preview";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -129,12 +130,21 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         onWheel={onWheel}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
+        onPointerUp={onPointerUp}
       >
         <g
           style={{
             transform: `translate(${camera.x}px, ${camera.y}px)`,
           }}
         >
+          {layerIds.map((layerId) => (
+            <LayerPreview
+              key={layerId}
+              id={layerId}
+              onLayerPointerDown={() => {}}
+              selectionColour="#000"
+            />
+          ))}
           <CursorPresence />
         </g>
       </svg>
