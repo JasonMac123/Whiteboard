@@ -1,11 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
+import { toast } from "sonner";
 
 import { useApiMutation } from "@/hooks/use-api-mutation";
 
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "./empty-state";
 import { BoardCard } from "./board-card";
@@ -20,7 +21,8 @@ interface BoardListProps {
 }
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
-  const data = useQuery(api.getBoards.get, { orgId });
+  const router = useRouter();
+  const data = useQuery(api.getBoards.get, { orgId, ...query });
 
   const { mutate, pending } = useApiMutation(api.board.create);
   const onClick = () => {
@@ -32,6 +34,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     })
       .then((id) => {
         toast.success("Board created");
+        router.push(`/board/${id}`);
       })
       .catch(() => {
         toast.error("Failed to create board");
@@ -123,6 +126,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
             authorName={board.authorName}
             createdAt={board._creationTime}
             orgId={board.orgId}
+            isFavourited={board.isFavourite}
           />
         ))}
       </div>
