@@ -159,7 +159,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
               key={layerId}
               id={layerId}
               onLayerPointerDown={() => {}}
-              selectionColour="#000"
+              selectionColour={layerIdsToColour[layerId]}
             />
           ))}
           <CursorPresence />
