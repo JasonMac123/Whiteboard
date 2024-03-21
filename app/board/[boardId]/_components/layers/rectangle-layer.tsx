@@ -1,3 +1,5 @@
+import rgbHex from "rgb-hex";
+
 import { RectangleLayer } from "@/types/layer";
 
 interface RectangleProps {
@@ -24,7 +26,7 @@ export const Rectangle = ({
       width={0}
       height={0}
       strokeWidth={1}
-      fill="#000"
+      fill={fill ? rgbHex(fill.r, fill.g, fill.b) : "#000"}
       stroke={selectionColour || "transparent"}
     />
   );
