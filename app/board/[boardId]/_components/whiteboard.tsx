@@ -13,7 +13,7 @@ import {
 import { LiveObject } from "@liveblocks/client";
 
 import { Camera, Colour, LayerType } from "@/types/layer";
-import { WhiteBoardMode, Point, WhiteBoardState } from "@/types/whiteboard";
+import { WhiteBoardMode, Point, WhiteBoardState, Side, XYWH } from "@/types/whiteboard";
 
 import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 
@@ -130,6 +130,18 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       setWhiteboardState({ mode: WhiteBoardMode.Translating, current: point });
     },
     [setWhiteboardState, camera, history, whiteboardState.mode]
+  );
+
+  const onResizeHandlePointerDown = useCallback(
+    (corner: Side, initialBounds: XYWH) => {
+      history.pause();
+      setWhiteboardState({
+        mode: WhiteBoardMode.Resizing,
+        initialBounds,
+        corner,
+      });
+    },
+    [history]
   );
 
   const selections = useOthersMapped((id) => id.presence.selection);
