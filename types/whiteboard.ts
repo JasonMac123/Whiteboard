@@ -9,7 +9,7 @@ export type XYWH = {
   x: number;
   y: number;
   width: number;
-  heigth: number;
+  height: number;
 };
 
 export enum Side {
@@ -38,11 +38,7 @@ export type WhiteBoardState =
     }
   | {
       mode: WhiteBoardMode.Inserting;
-      layerType:
-        | LayerType.Ellipse
-        | LayerType.Rectangle
-        | LayerType.Text
-        | LayerType.Note;
+      layerType: LayerType.Ellipse | LayerType.Rectangle | LayerType.Text | LayerType.Note;
     }
   | {
       mode: WhiteBoardMode.Resizing;

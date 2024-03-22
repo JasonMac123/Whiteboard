@@ -11,35 +11,111 @@ interface SelectionBoxProps {
   onResizeHandlePointerDown: (corner: Side, intialBounds: XYWH) => void;
 }
 
-export const SelectionBox = memo(
-  ({ onResizeHandlePointerDown }: SelectionBoxProps) => {
-    const layerId = useSelf((me) =>
-      me.presence.selection.length === 1 ? me.presence.selection[0] : null
-    );
+export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxProps) => {
+  const layerId = useSelf((me) =>
+    me.presence.selection.length === 1 ? me.presence.selection[0] : null
+  );
 
-    const showingHandles = useStorage(
-      (root) => layerId && root.layers.get(layerId)?.type !== LayerType.Path
-    );
+  const showingHandles = useStorage(
+    (root) => layerId && root.layers.get(layerId)?.type !== LayerType.Path
+  );
 
-    const bounds = useSelectionArea();
+  const bounds = useSelectionArea();
 
-    if (!bounds) {
-      return null;
-    }
-
-    return (
-      <>
-        <rect
-          className="fill-transparent stroke-blue-500 stroke-1 pointer-events-none"
-          style={{ transform: `translate(${bounds.x}px, ${bounds.y}px)` }}
-          x={0}
-          y={0}
-          width={bounds.width}
-          height={bounds.heigth}
-        />
-      </>
-    );
+  if (!bounds) {
+    return null;
   }
-);
+
+  return (
+    <>
+      <rect
+        className="fill-transparent stroke-blue-500 stroke-1 pointer-events-none"
+        style={{ transform: `translate(${bounds.x}px, ${bounds.y}px)` }}
+        x={0}
+        y={0}
+        width={bounds.width}
+        height={bounds.height}
+      />
+      {showingHandles && (
+        <>
+          <rect
+            className="fill-white stroke-1 stroke-blue-500"
+            x={0}
+            y={0}
+            style={{
+              cursor: "nwse-resize",
+              width: "8px",
+              height: "8px",
+              transform: `translate(${bounds.x - 4}px, ${bounds.y - 4}px)`,
+            }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+          />
+          <rect
+            className="fill-white stroke-1 stroke-blue-500"
+            x={0}
+            y={0}
+            style={{
+              cursor: "ns-resize",
+              width: "8px",
+              height: "8px",
+              transform: `translate(${bounds.x + bounds.width / 2 - 4}px, ${bounds.y - 4}px)`,
+            }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+          />
+          <rect
+            className="fill-white stroke-1 stroke-blue-500"
+            x={0}
+            y={0}
+            style={{
+              cursor: "nesw-resize",
+              width: "8px",
+              height: "8px",
+              transform: `translate(${bounds.x - 4 + bounds.width}px, ${bounds.y - 8 / 2}px)`,
+            }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+          />
+          <rect
+            className="fill-white stroke-1 stroke-blue-500"
+            x={0}
+            y={0}
+            style={{
+              cursor: "ew-resize",
+              width: "8px",
+              height: "8px",
+              transform: `translate(${bounds.x - 4 + bounds.width}px, ${
+                bounds.y + bounds.height / 2 + 4
+              }px)`,
+            }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+          />
+          <rect
+            className="fill-white stroke-1 stroke-blue-500"
+            x={0}
+            y={0}
+            style={{
+              cursor: "nwse-resize",
+              width: "8px",
+              height: "8px",
+              transform: `translate(${bounds.x - 4 + bounds.width}px, ${
+                bounds.y + bounds.height - 4
+              }px)`,
+            }}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+            }}
+          />
+        </>
+      )}
+    </>
+  );
+});
 
 SelectionBox.displayName = "SelectionBox";
