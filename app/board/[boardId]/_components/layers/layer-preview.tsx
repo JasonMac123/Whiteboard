@@ -22,7 +22,14 @@ export const LayerPreview = memo(
 
     switch (layer.type) {
       case LayerType.Rectangle:
-        return <Rectangle id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColour={selectionColour}/>;
+        return (
+          <Rectangle
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColour={selectionColour}
+          />
+        );
       case LayerType.Text:
         return <div></div>;
       case LayerType.Ellipse:
