@@ -25,15 +25,8 @@ export const OrgSidebar = () => {
     <div className="hidden lg:flex flex-col space-y-6 w-[310px] pl-5 pt-5 mr-4">
       <Link href={"/"}>
         <div className="flex items-center gap-x-2">
-          <Image
-            src={"/images/WhiteBoard.png"}
-            alt="Logo"
-            height={100}
-            width={100}
-          />
-          <span className={cn("font-semibold text-2xl", font.className)}>
-            Whiteboard
-          </span>
+          <Image src={"/images/WhiteBoard.png"} alt="Logo" height={100} width={100} />
+          <span className={cn("font-semibold text-2xl", font.className)}>Whiteboard</span>
         </div>
       </Link>
       <OrganizationSwitcher

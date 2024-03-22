@@ -14,11 +14,7 @@ interface WhiteBoardRoomProps {
   fallback: NonNullable<ReactNode> | null;
 }
 
-export const WhiteBoardRoom = ({
-  children,
-  roomId,
-  fallback,
-}: WhiteBoardRoomProps) => {
+export const WhiteBoardRoom = ({ children, roomId, fallback }: WhiteBoardRoomProps) => {
   return (
     <RoomProvider
       id={roomId}
@@ -28,9 +24,7 @@ export const WhiteBoardRoom = ({
         layerIds: new LiveList(),
       }}
     >
-      <ClientSideSuspense fallback={fallback}>
-        {() => children}
-      </ClientSideSuspense>
+      <ClientSideSuspense fallback={fallback}>{() => children}</ClientSideSuspense>
     </RoomProvider>
   );
 };

@@ -9,12 +9,7 @@ export type Camera = {
   y: number;
 };
 
-export type Layer =
-  | RectangleLayer
-  | EllipseLayer
-  | PathLayer
-  | TextLayer
-  | NoteLayer;
+export type Layer = RectangleLayer | EllipseLayer | PathLayer | TextLayer | NoteLayer;
 
 export enum LayerType {
   Rectangle,

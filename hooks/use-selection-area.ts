@@ -43,17 +43,16 @@ const boundingBox = (layers: Layer[]): XYWH | null => {
     x: left,
     y: top,
     width: right - left,
-    heigth: bottom - top,
+    height: bottom - top,
   };
 };
 
-
 export const useSelectionArea = () => {
-  const selection = useSelf((me) => me.presence.selection)
+  const selection = useSelf((me) => me.presence.selection);
 
   return useStorage((root) => {
-    const selectedLayers = selection.map((layerId) => root.layers.get(layerId)!).filter(Boolean)
+    const selectedLayers = selection.map((layerId) => root.layers.get(layerId)!).filter(Boolean);
 
-    return boundingBox(selectedLayers)
-  }, shallow)
-}
+    return boundingBox(selectedLayers);
+  }, shallow);
+};

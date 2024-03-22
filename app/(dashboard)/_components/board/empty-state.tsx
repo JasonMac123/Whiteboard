@@ -23,10 +23,7 @@ export const EmptyState = ({
   return (
     <div className="h-full flex flex-col items-center justify-center">
       <Image src={image} height={400} width={400} alt={altImage} />
-      <Link
-        href={attributionLink}
-        className="text-xs text-muted-foreground text-neutral-700"
-      >
+      <Link href={attributionLink} className="text-xs text-muted-foreground text-neutral-700">
         @Icon created by Freepik - Flaticon
       </Link>
       <h2 className="text-2xl font-semibold mt-6">{error}</h2>

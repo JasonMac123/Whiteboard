@@ -46,8 +46,9 @@ export const BoardCard = ({
   const { mutate: mutateFavourite, pending: pendingFavourite } = useApiMutation(
     api.board.favourite
   );
-  const { mutate: mutateUnfavourite, pending: pendingUnfavourite } =
-    useApiMutation(api.board.unfavourite);
+  const { mutate: mutateUnfavourite, pending: pendingUnfavourite } = useApiMutation(
+    api.board.unfavourite
+  );
 
   const toggleFavourite = () => {
     if (isFavourited) {

@@ -45,11 +45,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
   const insertLayer = useMutation(
     (
       { storage, setMyPresence },
-      layerType:
-        | LayerType.Ellipse
-        | LayerType.Rectangle
-        | LayerType.Text
-        | LayerType.Note,
+      layerType: LayerType.Ellipse | LayerType.Rectangle | LayerType.Text | LayerType.Note,
       position: Point
     ) => {
       const liveLayers = storage.get("layers");
@@ -85,15 +81,12 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     }));
   }, []);
 
-  const onPointerMove = useMutation(
-    ({ setMyPresence }, e: React.PointerEvent) => {
-      e.preventDefault();
+  const onPointerMove = useMutation(({ setMyPresence }, e: React.PointerEvent) => {
+    e.preventDefault();
 
-      const current = pointerEventToWhiteboardPoint(e, camera);
-      setMyPresence({ cursor: current });
-    },
-    []
-  );
+    const current = pointerEventToWhiteboardPoint(e, camera);
+    setMyPresence({ cursor: current });
+  }, []);
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
     setMyPresence({ cursor: null });

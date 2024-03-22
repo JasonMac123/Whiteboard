@@ -19,9 +19,7 @@ export const BoardFooter = ({
   toggleFavourite,
   disabled,
 }: BoardFooterProps) => {
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
     event.preventDefault();
     toggleFavourite();
@@ -41,12 +39,7 @@ export const BoardFooter = ({
           disabled && "cursor-not-allowed opacity-75"
         )}
       >
-        <Star
-          className={cn(
-            "h-6 w-6",
-            favourite && "fill-yellow-600 text-yellow-600"
-          )}
-        />
+        <Star className={cn("h-6 w-6", favourite && "fill-yellow-600 text-yellow-600")} />
       </button>
     </div>
   );

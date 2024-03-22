@@ -16,9 +16,7 @@ export const NoOrganization = () => {
         @Icon created by Freepik - Flaticon
       </Link>
       <h2 className="text-3xl font-semibold mt-6">Welcome to Whiteboard</h2>
-      <p className="text-muted-foreground text-sm mt-2">
-        Create an organization to get started
-      </p>
+      <p className="text-muted-foreground text-sm mt-2">Create an organization to get started</p>
       <div className="mt-6">
         <Dialog>
           <DialogTrigger asChild>

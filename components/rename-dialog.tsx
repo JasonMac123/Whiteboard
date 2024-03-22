@@ -46,9 +46,7 @@ export const RenameDialog = () => {
         <DialogHeader>
           <DialogTitle>Edit board title</DialogTitle>
         </DialogHeader>
-        <DialogDescription>
-          Enter a title to update with new board title
-        </DialogDescription>
+        <DialogDescription>Enter a title to update with new board title</DialogDescription>
         <form onSubmit={onSubmit} className="space-y-4">
           <Input
             disabled={pending}
