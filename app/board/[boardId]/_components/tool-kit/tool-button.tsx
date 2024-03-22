@@ -13,13 +13,7 @@ interface ToolButtonProps {
   disabled?: boolean;
 }
 
-export const ToolButton = ({
-  label,
-  icon: Icon,
-  onClick,
-  active,
-  disabled,
-}: ToolButtonProps) => {
+export const ToolButton = ({ label, icon: Icon, onClick, active, disabled }: ToolButtonProps) => {
   return (
     <HoverHint label={label} side="right" sideOffset={12}>
       <Button
