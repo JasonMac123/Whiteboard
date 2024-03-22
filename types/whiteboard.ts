@@ -42,7 +42,7 @@ export type WhiteBoardState =
     }
   | {
       mode: WhiteBoardMode.Resizing;
-      intialBounds: XYWH;
+      initialBounds: XYWH;
       corner: Side;
     }
   | {
