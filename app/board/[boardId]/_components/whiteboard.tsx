@@ -23,6 +23,7 @@ import { ToolKit } from "./tool-kit/index";
 import { CursorPresence } from "./cursor-presence";
 import { LayerPreview } from "./layers/layer-preview";
 import { randomColourToId } from "@/lib/utils";
+import { SelectionBox } from "./selection-box";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -185,6 +186,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
               selectionColour={layerIdsToColour[layerId]}
             />
           ))}
+          <SelectionBox onResizeHandlePointerDown={() => {}} />
           <CursorPresence />
         </g>
       </svg>
