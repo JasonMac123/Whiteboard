@@ -115,6 +115,29 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [camera, whiteboardState, history, insertLayer]
   );
 
+  const onLayerPointerDown = useMutation(
+    ({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
+      if (
+        whiteboardState.mode === WhiteBoardMode.Pencil ||
+        whiteboardState.mode === WhiteBoardMode.Inserting
+      ) {
+        return;
+      }
+
+      history.pause();
+      e.stopPropagation();
+
+      const point = pointerEventToWhiteboardPoint(e, camera);
+
+      if (!self.presence.selection.includes(layerId)) {
+        setMyPresence({ selection: [layerId] }, { addToHistory: true });
+      }
+
+      setWhiteboardState({ mode: WhiteBoardMode.Translating, current: point });
+    },
+    [setWhiteboardState, camera, history, whiteboardState.mode]
+  );
+
   const selections = useOthersMapped((id) => id.presence.selection);
   const layerIdsToColour = useMemo(() => {
     const layerIdsToColour: Record<string, string> = {};
@@ -158,7 +181,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
             <LayerPreview
               key={layerId}
               id={layerId}
-              onLayerPointerDown={() => {}}
+              onLayerPointerDown={onLayerPointerDown}
               selectionColour={layerIdsToColour[layerId]}
             />
           ))}
