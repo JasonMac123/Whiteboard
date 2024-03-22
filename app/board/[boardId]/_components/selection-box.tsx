@@ -38,6 +38,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
       />
       {showingHandles && (
         <>
+          {/* top-left resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -52,6 +53,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               e.stopPropagation();
             }}
           />
+          {/* top-middle resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -66,6 +68,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               e.stopPropagation();
             }}
           />
+          {/* top-right resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -80,6 +83,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               e.stopPropagation();
             }}
           />
+          {/* middle-right resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -96,6 +100,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               e.stopPropagation();
             }}
           />
+          {/* bottom-right resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -105,13 +110,14 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               width: "8px",
               height: "8px",
               transform: `translate(${bounds.x + bounds.width - 4}px, ${
-                bounds.y - bounds.height / 2 + 4
+                bounds.y + bounds.height - 4
               }px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
             }}
           />
+          {/* bottom-middle resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -128,6 +134,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               e.stopPropagation();
             }}
           />
+          {/* bottom-left resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
@@ -142,6 +149,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               e.stopPropagation();
             }}
           />
+          {/* middle-left resizing-box*/}
           <rect
             className="fill-white stroke-1 stroke-blue-500"
             x={0}
