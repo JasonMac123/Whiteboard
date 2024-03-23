@@ -191,7 +191,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
               selectionColour={layerIdsToColour[layerId]}
             />
           ))}
-          <SelectionBox onResizeHandlePointerDown={() => {}} />
+          <SelectionBox onResizeHandlePointerDown={onResizeHandlePointerDown} />
           <CursorPresence />
         </g>
       </svg>
