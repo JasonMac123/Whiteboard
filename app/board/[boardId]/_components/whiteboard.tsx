@@ -74,6 +74,12 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [lastColour]
   );
 
+  const resizeLayer = useMutation(({ storage, self }, point: Point) => {
+    if (whiteboardState.mode !== WhiteBoardMode.Resizing) {
+      return;
+    }
+  }, []);
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -81,12 +87,18 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     }));
   }, []);
 
-  const onPointerMove = useMutation(({ setMyPresence }, e: React.PointerEvent) => {
-    e.preventDefault();
+  const onPointerMove = useMutation(
+    ({ setMyPresence }, e: React.PointerEvent) => {
+      e.preventDefault();
 
-    const current = pointerEventToWhiteboardPoint(e, camera);
-    setMyPresence({ cursor: current });
-  }, []);
+      const current = pointerEventToWhiteboardPoint(e, camera);
+      setMyPresence({ cursor: current });
+
+      if (whiteboardState.mode === WhiteBoardMode.Resizing) {
+      }
+    },
+    [whiteboardState]
+  );
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
     setMyPresence({ cursor: null });
