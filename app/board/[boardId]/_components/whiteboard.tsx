@@ -129,6 +129,16 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [whiteboardState]
   );
 
+  const selectMultipleLayers = useCallback((current: Point, origin: Point) => {
+    if (Math.abs(current.x - origin.x) + Math.abs(current.y - origin.y) > 5) {
+      setWhiteboardState({
+        mode: WhiteBoardMode.SelectionNet,
+        origin,
+        current,
+      });
+    }
+  }, []);
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -143,7 +153,9 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       const current = pointerEventToWhiteboardPoint(e, camera);
       setMyPresence({ cursor: current });
 
-      if (whiteboardState.mode === WhiteBoardMode.Translating) {
+      if (whiteboardState.mode === WhiteBoardMode.Pressing) {
+        selectMultipleLayers(current, whiteboardState.origin);
+      } else if (whiteboardState.mode === WhiteBoardMode.Translating) {
         translateLayers(current);
       } else if (whiteboardState.mode === WhiteBoardMode.Resizing) {
         resizeLayer(current);
