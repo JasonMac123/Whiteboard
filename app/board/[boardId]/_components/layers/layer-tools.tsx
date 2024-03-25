@@ -46,6 +46,21 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     }
   }, []);
 
+  const moveToFront = useMutation(({ storage }) => {
+    const liveLayersIds = storage.get("layerIds");
+    const index: number[] = [];
+
+    const liveLayerArray = liveLayersIds.toArray();
+
+    for (let i = 0; i < liveLayerArray.length; i++) {
+      if (selection.includes(liveLayerArray[i])) index.push(i);
+    }
+
+    for (let i = index.length; i >= 0; i--) {
+      liveLayersIds.move(index[i], index.length - 1 - (index.length - 1 - i));
+    }
+  }, []);
+
   const deleteLayers = useDeleteLayers();
 
   const selectionArea = useSelectionArea();
@@ -65,7 +80,7 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       <LayerColourPicker onChange={setLayerFill} />
       <div className="flex flex-col gap-y-0.5">
         <HoverHint label="Bring to Front">
-          <Button variant="board" size="icon">
+          <Button variant="board" size="icon" onClick={moveToFront}>
             <BringToFront />
           </Button>
         </HoverHint>
