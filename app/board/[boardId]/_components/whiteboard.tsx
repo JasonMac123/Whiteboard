@@ -24,6 +24,7 @@ import { CursorPresence } from "./cursor-presence";
 import { LayerPreview } from "./layers/layer-preview";
 import { randomColourToId } from "@/lib/utils";
 import { SelectionBox } from "./selection-box";
+import { resizeBounds } from "@/lib/resizeBounds";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -78,6 +79,15 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     if (whiteboardState.mode !== WhiteBoardMode.Resizing) {
       return;
     }
+
+    const bounds = resizeBounds(whiteboardState.initialBounds, whiteboardState.corner, point);
+
+    const liveLayers = storage.get("layers");
+    const layer = liveLayers.get(self.presence.selection[0]);
+
+    if (layer) {
+      layer.update(bounds);
+    }
   }, []);
 
   const onWheel = useCallback((e: React.WheelEvent) => {
@@ -95,9 +105,10 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       setMyPresence({ cursor: current });
 
       if (whiteboardState.mode === WhiteBoardMode.Resizing) {
+        resizeLayer(current);
       }
     },
-    [whiteboardState]
+    [whiteboardState, resizeLayer, camera]
   );
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
