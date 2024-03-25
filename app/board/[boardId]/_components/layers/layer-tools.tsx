@@ -5,6 +5,7 @@ import { memo } from "react";
 
 import { Camera, Colour } from "@/types/layer";
 import { useSelectionArea } from "@/hooks/use-selection-area";
+import { LayerColourPicker } from "./layer-colour-picker";
 
 interface LayerToolsProps {
   camera: Camera;
@@ -27,7 +28,9 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     <div
       className="absolute p-3 rounded-xl bg-white shadow-sm b order flex select-none"
       style={{ transform: `translate(calc(${x}px - 50%), calc(${y - 16} - 100%))` }}
-    ></div>
+    >
+      <LayerColourPicker onChange={setLastColour} />
+    </div>
   );
 });
 
