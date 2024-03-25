@@ -23,10 +23,12 @@ import { randomColourToId } from "@/lib/utils";
 import { BoardInfo } from "./board-layout/board-info";
 import { BoardMembers } from "./board-layout/board-members";
 import { ToolKit } from "./board-layout/tool-kit/index";
-import { CursorPresence } from "./cursor-presence";
+
+import { LayerTools } from "./layers/layer-tools";
 import { LayerPreview } from "./layers/layer-preview";
+
+import { CursorPresence } from "./cursor-presence";
 import { SelectionBox } from "./selection-box";
-import { LayerTools } from "./layer-tools";
 
 interface WhiteBoardProps {
   boardId: string;
