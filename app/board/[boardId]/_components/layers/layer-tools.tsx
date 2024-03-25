@@ -1,6 +1,6 @@
 "use client";
 
-import { useSelf } from "@/liveblocks.config";
+import { useMutation, useSelf } from "@/liveblocks.config";
 import { memo } from "react";
 
 import { Camera, Colour } from "@/types/layer";
@@ -14,6 +14,16 @@ interface LayerToolsProps {
 
 export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
   const selection = useSelf((me) => me.presence.selection);
+
+  const setLayerFill = useMutation(
+    ({ storage }, fill: Colour) => {
+      const liveLayers = storage.get("layers");
+      selection.forEach((id) => {
+        liveLayers.get(id)?.set("fill", fill);
+      });
+    },
+    [selection, setLastColour]
+  );
 
   const selectionArea = useSelectionArea();
 
@@ -29,7 +39,7 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       className="absolute p-3 rounded-xl bg-white shadow-sm b order flex select-none"
       style={{ transform: `translate(calc(${x}px - 50%), calc(${y - 16} - 100%))` }}
     >
-      <LayerColourPicker onChange={setLastColour} />
+      <LayerColourPicker onChange={setLayerFill} />
     </div>
   );
 });
