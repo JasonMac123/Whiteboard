@@ -90,6 +90,35 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     }
   }, []);
 
+  const translateLayers = useMutation(
+    ({ storage, self }, point: Point) => {
+      if (whiteboardState.mode !== WhiteBoardMode.Translating) {
+        return;
+      }
+
+      const offset = {
+        x: point.x - whiteboardState.current.x,
+        y: point.y - whiteboardState.current.y,
+      };
+
+      const liveLayers = storage.get("layers");
+
+      for (const id of self.presence.selection) {
+        const layer = liveLayers.get(id);
+
+        if (layer) {
+          layer.update({
+            x: layer.get("x") + offset.x,
+            y: layer.get("y") + offset.y,
+          });
+        }
+      }
+
+      setWhiteboardState({ mode: WhiteBoardMode.Translating, current: point });
+    },
+    [whiteboardState]
+  );
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -104,7 +133,9 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       const current = pointerEventToWhiteboardPoint(e, camera);
       setMyPresence({ cursor: current });
 
-      if (whiteboardState.mode === WhiteBoardMode.Resizing) {
+      if (whiteboardState.mode === WhiteBoardMode.Translating) {
+        translateLayers(current);
+      } else if (whiteboardState.mode === WhiteBoardMode.Resizing) {
         resizeLayer(current);
       }
     },
@@ -129,7 +160,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
 
       history.resume();
     },
-    [camera, whiteboardState, history, insertLayer]
+    [camera, whiteboardState, history, insertLayer, translateLayers]
   );
 
   const onLayerPointerDown = useMutation(
