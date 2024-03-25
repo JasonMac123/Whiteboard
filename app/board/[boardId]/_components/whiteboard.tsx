@@ -139,6 +139,18 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     }
   }, []);
 
+  const updateSelectionNet = useMutation(
+    ({ storage, setMyPresence }, current: Point, origin: Point) => {
+      const layers = storage.get("layers").toImmutable();
+      setWhiteboardState({
+        mode: WhiteBoardMode.SelectionNet,
+        origin,
+        current,
+      });
+    },
+    []
+  );
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -155,6 +167,8 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
 
       if (whiteboardState.mode === WhiteBoardMode.Pressing) {
         selectMultipleLayers(current, whiteboardState.origin);
+      } else if (whiteboardState.mode === WhiteBoardMode.SelectionNet) {
+        updateSelectionNet(current, whiteboardState.origin);
       } else if (whiteboardState.mode === WhiteBoardMode.Translating) {
         translateLayers(current);
       } else if (whiteboardState.mode === WhiteBoardMode.Resizing) {
