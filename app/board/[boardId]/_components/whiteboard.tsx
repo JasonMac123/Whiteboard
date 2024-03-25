@@ -20,12 +20,13 @@ import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 import { resizeBounds } from "@/lib/resizeBounds";
 import { randomColourToId } from "@/lib/utils";
 
-import { BoardInfo } from "./board-info";
-import { BoardMembers } from "./board-members";
-import { ToolKit } from "./tool-kit/index";
+import { BoardInfo } from "./board-layout/board-info";
+import { BoardMembers } from "./board-layout/board-members";
+import { ToolKit } from "./board-layout/tool-kit/index";
 import { CursorPresence } from "./cursor-presence";
 import { LayerPreview } from "./layers/layer-preview";
 import { SelectionBox } from "./selection-box";
+import { LayerTools } from "./layer-tools";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -251,6 +252,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         undo={history.undo}
         redo={history.redo}
       />
+      <LayerTools camera={camera} setLastColour={setLastColour} />
       <svg
         className="h-[100vh] g-[100vw]"
         onWheel={onWheel}
