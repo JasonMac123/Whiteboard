@@ -19,6 +19,7 @@ import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 
 import { resizeBounds } from "@/lib/resizeBounds";
 import { randomColourToId } from "@/lib/utils";
+import { findIntersectingLayersWithSelection } from "@/lib/findIntersectingLayersWithSelection";
 
 import { BoardInfo } from "./board-layout/board-info";
 import { BoardMembers } from "./board-layout/board-members";
@@ -147,8 +148,12 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         origin,
         current,
       });
+
+      const ids = findIntersectingLayersWithSelection(layerIds, layers, origin, current);
+
+      setMyPresence({ selection: ids });
     },
-    []
+    [layerIds]
   );
 
   const onWheel = useCallback((e: React.WheelEvent) => {
