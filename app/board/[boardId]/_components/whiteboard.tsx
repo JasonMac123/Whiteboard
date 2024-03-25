@@ -17,14 +17,15 @@ import { WhiteBoardMode, Point, WhiteBoardState, Side, XYWH } from "@/types/whit
 
 import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 
+import { resizeBounds } from "@/lib/resizeBounds";
+import { randomColourToId } from "@/lib/utils";
+
 import { BoardInfo } from "./board-info";
 import { BoardMembers } from "./board-members";
 import { ToolKit } from "./tool-kit/index";
 import { CursorPresence } from "./cursor-presence";
 import { LayerPreview } from "./layers/layer-preview";
-import { randomColourToId } from "@/lib/utils";
 import { SelectionBox } from "./selection-box";
-import { resizeBounds } from "@/lib/resizeBounds";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -74,6 +75,12 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     },
     [lastColour]
   );
+
+  const unselectLayer = useMutation(({ self, setMyPresence }) => {
+    if (self.presence.selection.length > 0) {
+      setMyPresence({ selection: [] }, { addToHistory: true });
+    }
+  }, []);
 
   const resizeLayer = useMutation(({ storage, self }, point: Point) => {
     if (whiteboardState.mode !== WhiteBoardMode.Resizing) {
@@ -150,7 +157,13 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     ({}, e) => {
       const point = pointerEventToWhiteboardPoint(e, camera);
 
-      if (whiteboardState.mode === WhiteBoardMode.Inserting) {
+      if (
+        whiteboardState.mode === WhiteBoardMode.None ||
+        whiteboardState.mode === WhiteBoardMode.Pressing
+      ) {
+        unselectLayer();
+        setWhiteboardState({ mode: WhiteBoardMode.None });
+      } else if (whiteboardState.mode === WhiteBoardMode.Inserting) {
         insertLayer(whiteboardState.layerType, point);
       } else {
         setWhiteboardState({
@@ -160,7 +173,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
 
       history.resume();
     },
-    [camera, whiteboardState, history, insertLayer, translateLayers]
+    [camera, whiteboardState, history, insertLayer, translateLayers, unselectLayer]
   );
 
   const onPointerDown = useCallback(
