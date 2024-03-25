@@ -163,6 +163,19 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [camera, whiteboardState, history, insertLayer, translateLayers]
   );
 
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      const point = pointerEventToWhiteboardPoint(e, camera);
+
+      if (whiteboardState.mode === WhiteBoardMode.Inserting) {
+        return;
+      }
+
+      setWhiteboardState({ origin: point, mode: WhiteBoardMode.Pressing });
+    },
+    [whiteboardState, camera]
+  );
+
   const onLayerPointerDown = useMutation(
     ({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
       if (
@@ -231,6 +244,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
         onPointerUp={onPointerUp}
+        onPointerDown={onPointerDown}
       >
         <g
           style={{
