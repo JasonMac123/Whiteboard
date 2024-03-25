@@ -1,7 +1,10 @@
 "use client";
 
-import { Camera, Colour } from "@/types/layer";
+import { useSelf } from "@/liveblocks.config";
 import { memo } from "react";
+
+import { Camera, Colour } from "@/types/layer";
+import { useSelectionArea } from "@/hooks/use-selection-area";
 
 interface LayerToolsProps {
   camera: Camera;
@@ -9,7 +12,23 @@ interface LayerToolsProps {
 }
 
 export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
-  return <div></div>;
+  const selection = useSelf((me) => me.presence.selection);
+
+  const selectionArea = useSelectionArea();
+
+  if (!selectionArea) {
+    return null;
+  }
+
+  const x = selectionArea.width / 2 + selectionArea.x + camera.x;
+  const y = selectionArea.y + camera.y;
+
+  return (
+    <div
+      className="absolute p-3 rounded-xl bg-white shadow-sm b order flex select-none"
+      style={{ transform: `translate(calc(${x}px - 50%), calc(${y - 16} - 100%))` }}
+    ></div>
+  );
 });
 
 LayerTools.displayName = "LayerTools";
