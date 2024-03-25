@@ -2,10 +2,16 @@
 
 import { useMutation, useSelf } from "@/liveblocks.config";
 import { memo } from "react";
+import { Trash2 } from "lucide-react";
+
+import { useDeleteLayers } from "@/hooks/use-delete-layers";
+import { useSelectionArea } from "@/hooks/use-selection-area";
 
 import { Camera, Colour } from "@/types/layer";
-import { useSelectionArea } from "@/hooks/use-selection-area";
+
 import { LayerColourPicker } from "./layer-colour-picker";
+import { HoverHint } from "@/components/hover-hint";
+import { Button } from "@/components/ui/button";
 
 interface LayerToolsProps {
   camera: Camera;
@@ -25,6 +31,8 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     [selection, setLastColour]
   );
 
+  const deleteLayers = useDeleteLayers();
+
   const selectionArea = useSelectionArea();
 
   if (!selectionArea) {
@@ -40,6 +48,11 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       style={{ transform: `translate(calc(${x}px - 50%), calc(${y - 16} - 100%))` }}
     >
       <LayerColourPicker onChange={setLayerFill} />
+      <div className="flex items-center pl-2 ml-2 border-l border-neutral-200">
+        <HoverHint label="Delete">
+          <Button variant="board" size="icon" onClick={deleteLayers} />
+        </HoverHint>
+      </div>
     </div>
   );
 });
