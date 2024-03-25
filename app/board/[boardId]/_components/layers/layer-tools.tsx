@@ -31,6 +31,21 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     [selection, setLastColour]
   );
 
+  const moveToBack = useMutation(({ storage }) => {
+    const liveLayersIds = storage.get("layerIds");
+    const index: number[] = [];
+
+    const liveLayerArray = liveLayersIds.toArray();
+
+    for (let i = 0; i < liveLayerArray.length; i++) {
+      if (selection.includes(liveLayerArray[i])) index.push(i);
+    }
+
+    for (let i = 0; i < index.length; i++) {
+      liveLayersIds.move(index[i], i);
+    }
+  }, []);
+
   const deleteLayers = useDeleteLayers();
 
   const selectionArea = useSelectionArea();
@@ -55,7 +70,7 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
           </Button>
         </HoverHint>
         <HoverHint label="Bring to Back">
-          <Button variant="board" size="icon">
+          <Button variant="board" size="icon" onClick={moveToBack}>
             <SendToBack />
           </Button>
         </HoverHint>
