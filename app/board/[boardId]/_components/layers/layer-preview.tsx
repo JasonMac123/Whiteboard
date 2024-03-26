@@ -5,6 +5,7 @@ import { memo } from "react";
 
 import { LayerType } from "@/types/layer";
 import { Rectangle } from "./rectangle-layer";
+import { Ellipse } from "./ellipse-layer";
 
 interface LayerPreviewProps {
   id: string;
@@ -33,7 +34,14 @@ export const LayerPreview = memo(
       case LayerType.Text:
         return <div></div>;
       case LayerType.Ellipse:
-        return <div></div>;
+        return (
+          <Ellipse
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColour={selectionColour}
+          />
+        );
       case LayerType.Note:
         return <div></div>;
       case LayerType.Path:
