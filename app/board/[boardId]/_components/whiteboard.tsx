@@ -308,6 +308,16 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
             />
           ))}
           <SelectionBox onResizeHandlePointerDown={onResizeHandlePointerDown} />
+          {whiteboardState.mode === WhiteBoardMode.SelectionNet &&
+            whiteboardState.current != null && (
+              <rect
+                className="fill-sky-200/5 stroke-sky-200 stroke-1"
+                x={Math.min(whiteboardState.origin.x, whiteboardState.current.x)}
+                y={Math.min(whiteboardState.origin.y, whiteboardState.current.y)}
+                width={Math.abs(whiteboardState.origin.x - whiteboardState.current.x)}
+                height={Math.abs(whiteboardState.origin.y - whiteboardState.current.y)}
+              />
+            )}
           <CursorPresence />
         </g>
       </svg>
