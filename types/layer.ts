@@ -58,6 +58,7 @@ export type TextLayer = {
   width: number;
   fill: Colour;
   value?: string;
+  fontSize: number;
 };
 
 export type NoteLayer = {

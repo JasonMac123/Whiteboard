@@ -20,7 +20,7 @@ interface TextLayerProps {
 }
 
 export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerProps) => {
-  const { x, y, width, height, fill, value } = layer;
+  const { x, y, width, height, fill, value, fontSize } = layer;
 
   return (
     <foreignObject
@@ -40,7 +40,7 @@ export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerPro
           "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
           font.className
         )}
-        style={{ color: fill ? rgbHex(fill.r, fill.g, fill.b) : "#000" }}
+        style={{ color: fill ? rgbHex(fill.r, fill.g, fill.b) : "#000", fontSize: fontSize }}
       />
     </foreignObject>
   );
