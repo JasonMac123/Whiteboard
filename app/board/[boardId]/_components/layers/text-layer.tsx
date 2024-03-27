@@ -22,6 +22,11 @@ interface TextLayerProps {
 export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerProps) => {
   const { x, y, width, height, fill, value, fontSize } = layer;
 
+  const updateValue = useMutation(({ storage }, newValue: string) => {
+    const liveLayers = storage.get("layers");
+    liveLayers.get(id)?.set("value", newValue);
+  }, []);
+
   return (
     <foreignObject
       x={x}
