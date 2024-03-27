@@ -12,16 +12,18 @@ interface EllipseLayerProps {
 }
 
 export const Ellipse = ({ id, layer, onPointerDown, selectionColour }: EllipseLayerProps) => {
+  const { x, y, width, height, fill } = layer;
+
   return (
     <ellipse
       className="drop-shadow-md"
       onPointerDown={(e) => onPointerDown(e, id)}
-      style={{ transform: `translate(${layer.x}px, ${layer.y}px)` }}
-      cx={layer.width / 2}
-      cy={layer.height / 2}
-      rx={layer.width / 2}
-      ry={layer.height / 2}
-      fill={layer.fill ? rgbHex(layer.fill.r, layer.fill.g, layer.fill.b) : "#000"}
+      style={{ transform: `translate(${x}px, ${y}px)` }}
+      cx={width / 2}
+      cy={height / 2}
+      rx={width / 2}
+      ry={height / 2}
+      fill={fill ? rgbHex(fill.r, fill.g, fill.b) : "#000"}
       stroke={selectionColour || "transparent"}
       strokeWidth={1}
     />
