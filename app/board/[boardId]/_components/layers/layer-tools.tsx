@@ -2,7 +2,7 @@
 
 import { useMutation, useSelf } from "@/liveblocks.config";
 import { memo } from "react";
-import { BringToFront, SendToBack, Trash2 } from "lucide-react";
+import { AArrowDown, AArrowUp, BringToFront, SendToBack } from "lucide-react";
 
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { useSelectionArea } from "@/hooks/use-selection-area";
@@ -87,6 +87,18 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
         <HoverHint label="Bring to Back">
           <Button variant="board" size="icon" onClick={moveToBack}>
             <SendToBack />
+          </Button>
+        </HoverHint>
+      </div>
+      <div className="flex flex-col gap-y-0.5">
+        <HoverHint label="Increase Text Size">
+          <Button variant="board" size="icon" onClick={moveToFront}>
+            <AArrowUp />
+          </Button>
+        </HoverHint>
+        <HoverHint label="Decrease Text Size">
+          <Button variant="board" size="icon" onClick={moveToBack}>
+            <AArrowDown />
           </Button>
         </HoverHint>
       </div>
