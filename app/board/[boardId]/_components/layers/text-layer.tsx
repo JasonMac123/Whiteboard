@@ -33,7 +33,15 @@ export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerPro
         outline: selectionColour ? `1px solid ${selectionColour}` : "none",
       }}
     >
-      <ContentEditable html="Text" onChange={() => {}} />
+      <ContentEditable
+        html="Text"
+        onChange={() => {}}
+        className={cn(
+          "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
+          font.className
+        )}
+        style={{ color: fill ? rgbHex(fill.r, fill.g, fill.b) : "#000" }}
+      />
     </foreignObject>
   );
 };
