@@ -27,6 +27,7 @@ export type RectangleLayer = {
   width: number;
   fill: Colour;
   value?: string;
+  fontSize?: number;
 };
 
 export type EllipseLayer = {
@@ -37,6 +38,7 @@ export type EllipseLayer = {
   width: number;
   fill: Colour;
   value?: string;
+  fontSize?: number;
 };
 
 export type PathLayer = {
@@ -48,6 +50,7 @@ export type PathLayer = {
   fill: Colour;
   points: number[][];
   value?: string;
+  fontSize?: number;
 };
 
 export type TextLayer = {
@@ -58,7 +61,7 @@ export type TextLayer = {
   width: number;
   fill: Colour;
   value?: string;
-  fontSize: number;
+  fontSize?: number;
 };
 
 export type NoteLayer = {
@@ -69,4 +72,5 @@ export type NoteLayer = {
   width: number;
   fill: Colour;
   value?: string;
+  fontSize?: number;
 };

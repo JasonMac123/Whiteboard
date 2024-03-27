@@ -7,7 +7,7 @@ import { AArrowDown, AArrowUp, BringToFront, SendToBack } from "lucide-react";
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { useSelectionArea } from "@/hooks/use-selection-area";
 
-import { Camera, Colour } from "@/types/layer";
+import { Camera, Colour, LayerType } from "@/types/layer";
 
 import { LayerColourPicker } from "./layer-colour-picker";
 import { HoverHint } from "@/components/hover-hint";
@@ -29,6 +29,26 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       });
     },
     [selection, setLastColour]
+  );
+
+  const setFontSize = useMutation(
+    ({ storage }, change: number) => {
+      const liveLayers = storage.get("layers");
+
+      selection.forEach((id) => {
+        const layerType = liveLayers.get(id)?.get("type");
+
+        if (layerType === LayerType.Text || LayerType.Note) {
+          const currentFontSize = liveLayers.get(id)?.get("fontSize");
+
+          const defaultChange = change > 0 ? 14 : 10;
+          const newFontSize = currentFontSize ? currentFontSize + change : defaultChange;
+
+          liveLayers.get(id)?.set("fontSize", newFontSize);
+        }
+      });
+    },
+    [selection]
   );
 
   const moveToBack = useMutation(({ storage }) => {
@@ -92,12 +112,12 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       </div>
       <div className="flex flex-col gap-y-0.5">
         <HoverHint label="Increase Text Size">
-          <Button variant="board" size="icon" onClick={moveToFront}>
+          <Button variant="board" size="icon" onClick={() => setFontSize(2)}>
             <AArrowUp />
           </Button>
         </HoverHint>
         <HoverHint label="Decrease Text Size">
-          <Button variant="board" size="icon" onClick={moveToBack}>
+          <Button variant="board" size="icon" onClick={() => setFontSize(-2)}>
             <AArrowDown />
           </Button>
         </HoverHint>
