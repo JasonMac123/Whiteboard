@@ -27,6 +27,10 @@ export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerPro
     liveLayers.get(id)?.set("value", newValue);
   }, []);
 
+  const handleContentChange = (e: ContentEditableEvent) => {
+    updateValue(e.target.value);
+  };
+
   return (
     <foreignObject
       x={x}
@@ -39,8 +43,8 @@ export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerPro
       }}
     >
       <ContentEditable
-        html="Text"
-        onChange={() => {}}
+        html={value || "Text"}
+        onChange={handleContentChange}
         className={cn(
           "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
           font.className
