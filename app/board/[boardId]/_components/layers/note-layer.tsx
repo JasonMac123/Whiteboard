@@ -52,7 +52,7 @@ export const Note = ({ id, layer, onPointerDown, selectionColour }: NoteLayerPro
           font.className
         )}
         style={{
-          color: fill ? rgbHex(textFill.r, textFill.g, textFill.b) : "#000",
+          color: textFill ? rgbHex(textFill.r, textFill.g, textFill.b) : "#000",
           fontSize: fontSize,
         }}
       />
