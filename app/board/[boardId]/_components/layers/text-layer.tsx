@@ -43,7 +43,7 @@ export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerPro
       }}
     >
       <ContentEditable
-        html={value || "Text"}
+        html={value || ""}
         onChange={handleContentChange}
         className={cn(
           "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
