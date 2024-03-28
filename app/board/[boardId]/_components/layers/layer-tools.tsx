@@ -41,7 +41,7 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
         if (layerType === LayerType.Text || LayerType.Note) {
           const currentFontSize = liveLayers.get(id)?.get("fontSize");
 
-          const defaultChange = change > 0 ? 14 : 10;
+          const defaultChange = change > 0 ? 18 : 10;
           const newFontSize = currentFontSize ? currentFontSize + change : defaultChange;
 
           liveLayers.get(id)?.set("fontSize", newFontSize);
