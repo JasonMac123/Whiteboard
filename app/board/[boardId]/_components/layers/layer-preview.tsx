@@ -7,6 +7,7 @@ import { LayerType } from "@/types/layer";
 import { Rectangle } from "./rectangle-layer";
 import { Ellipse } from "./ellipse-layer";
 import { Text } from "./text-layer";
+import { Note } from "./note-layer";
 
 interface LayerPreviewProps {
   id: string;
@@ -51,7 +52,14 @@ export const LayerPreview = memo(
           />
         );
       case LayerType.Note:
-        return <div></div>;
+        return (
+          <Note
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColour={selectionColour}
+          />
+        );
       case LayerType.Path:
         return <div></div>;
       default:
