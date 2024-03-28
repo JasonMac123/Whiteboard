@@ -287,7 +287,7 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       />
       <LayerTools camera={camera} setLastColour={setLastColour} />
       <svg
-        className="h-[100vh] g-[100vw]"
+        className="h-[100vh] w-[100vw]"
         onWheel={onWheel}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
