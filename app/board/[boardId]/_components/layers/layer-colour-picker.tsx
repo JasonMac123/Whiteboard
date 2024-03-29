@@ -15,6 +15,9 @@ export const LayerColourPicker = ({ onChange }: LayerColourPickerProps) => {
       <ColourButton onClick={onChange} colour={{ r: 243, g: 79, b: 40 }} />
       <ColourButton onClick={onChange} colour={{ r: 255, g: 250, b: 177 }} />
       <ColourButton onClick={onChange} colour={{ r: 68, g: 200, b: 100 }} />
+      <ColourButton onClick={onChange} colour={{ r: 243, g: 79, b: 40 }} />
+      <ColourButton onClick={onChange} colour={{ r: 255, g: 250, b: 177 }} />
+      <ColourButton onClick={onChange} colour={{ r: 68, g: 200, b: 100 }} />
     </div>
   );
 };
