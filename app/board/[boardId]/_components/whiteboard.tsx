@@ -86,20 +86,23 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     }
   }, []);
 
-  const resizeLayer = useMutation(({ storage, self }, point: Point) => {
-    if (whiteboardState.mode !== WhiteBoardMode.Resizing) {
-      return;
-    }
+  const resizeLayer = useMutation(
+    ({ storage, self }, point: Point) => {
+      if (whiteboardState.mode !== WhiteBoardMode.Resizing) {
+        return;
+      }
 
-    const bounds = resizeBounds(whiteboardState.initialBounds, whiteboardState.corner, point);
+      const bounds = resizeBounds(whiteboardState.initialBounds, whiteboardState.corner, point);
 
-    const liveLayers = storage.get("layers");
-    const layer = liveLayers.get(self.presence.selection[0]);
+      const liveLayers = storage.get("layers");
+      const layer = liveLayers.get(self.presence.selection[0]);
 
-    if (layer) {
-      layer.update(bounds);
-    }
-  }, []);
+      if (layer) {
+        layer.update(bounds);
+      }
+    },
+    [whiteboardState]
+  );
 
   const translateLayers = useMutation(
     ({ storage, self }, point: Point) => {
