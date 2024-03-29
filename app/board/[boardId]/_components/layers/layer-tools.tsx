@@ -94,8 +94,12 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
 
   return (
     <div
-      className="absolute p-3 rounded-xl bg-white shadow-sm b order flex select-none"
-      style={{ transform: `translate(calc(${x}px - 50%), calc(${y - 16} - 100%))` }}
+      className="absolute p-3 rounded-xl bg-white shadow-sm border flex select-none"
+      style={{
+        transform: `translate(
+        calc(${x}px - 50%), calc(${y - 16}px - 100%)
+        )`,
+      }}
     >
       <LayerColourPicker onChange={setLayerFill} />
       <div className="flex flex-col gap-y-0.5">
