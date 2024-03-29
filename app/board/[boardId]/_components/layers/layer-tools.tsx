@@ -51,35 +51,41 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     [selection]
   );
 
-  const moveToBack = useMutation(({ storage }) => {
-    const liveLayersIds = storage.get("layerIds");
-    const index: number[] = [];
+  const moveToBack = useMutation(
+    ({ storage }) => {
+      const liveLayersIds = storage.get("layerIds");
+      const index: number[] = [];
 
-    const liveLayerArray = liveLayersIds.toArray();
+      const liveLayerArray = liveLayersIds.toArray();
 
-    for (let i = 0; i < liveLayerArray.length; i++) {
-      if (selection.includes(liveLayerArray[i])) index.push(i);
-    }
+      for (let i = 0; i < liveLayerArray.length; i++) {
+        if (selection.includes(liveLayerArray[i])) index.push(i);
+      }
 
-    for (let i = 0; i < index.length; i++) {
-      liveLayersIds.move(index[i], i);
-    }
-  }, []);
+      for (let i = 0; i < index.length; i++) {
+        liveLayersIds.move(index[i], i);
+      }
+    },
+    [selection]
+  );
 
-  const moveToFront = useMutation(({ storage }) => {
-    const liveLayersIds = storage.get("layerIds");
-    const index: number[] = [];
+  const moveToFront = useMutation(
+    ({ storage }) => {
+      const liveLayersIds = storage.get("layerIds");
+      const index: number[] = [];
 
-    const liveLayerArray = liveLayersIds.toArray();
+      const liveLayerArray = liveLayersIds.toArray();
 
-    for (let i = 0; i < liveLayerArray.length; i++) {
-      if (selection.includes(liveLayerArray[i])) index.push(i);
-    }
+      for (let i = 0; i < liveLayerArray.length; i++) {
+        if (selection.includes(liveLayerArray[i])) index.push(i);
+      }
 
-    for (let i = index.length; i >= 0; i--) {
-      liveLayersIds.move(index[i], index.length - 1 - (index.length - 1 - i));
-    }
-  }, []);
+      for (let i = index.length; i >= 0; i--) {
+        liveLayersIds.move(index[i], index.length - 1 - (index.length - 1 - i));
+      }
+    },
+    [selection]
+  );
 
   const deleteLayers = useDeleteLayers();
 
