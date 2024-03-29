@@ -68,7 +68,6 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         y: position.y,
         height: 100,
         width: 100,
-        fill: lastColour,
       });
 
       liveLayersIds.push(layerId);

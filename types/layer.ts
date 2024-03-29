@@ -25,7 +25,8 @@ export type RectangleLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Colour;
+  fill?: Colour;
+  textFill?: Colour;
   value?: string;
   fontSize?: number;
 };
@@ -36,8 +37,8 @@ export type EllipseLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Colour;
-  textFill: Colour;
+  fill?: Colour;
+  textFill?: Colour;
   value?: string;
   fontSize?: number;
 };
@@ -48,8 +49,8 @@ export type PathLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Colour;
-  textFill: Colour;
+  fill?: Colour;
+  textFill?: Colour;
   points: number[][];
   value?: string;
   fontSize?: number;
@@ -61,8 +62,8 @@ export type TextLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Colour;
-  textFill: Colour;
+  fill?: Colour;
+  textFill?: Colour;
   value?: string;
   fontSize?: number;
 };
@@ -73,8 +74,8 @@ export type NoteLayer = {
   y: number;
   height: number;
   width: number;
-  fill: Colour;
-  textFill: Colour;
+  fill?: Colour;
+  textFill?: Colour;
   value?: string;
   fontSize?: number;
 };
