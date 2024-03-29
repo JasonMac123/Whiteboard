@@ -102,11 +102,11 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       }}
     >
       <div>
-        <p>Change Layer colour</p>
+        <p>Change Layer Colour</p>
         <LayerColourPicker onChange={setLayerFill} />
       </div>
       <div>
-        <p>Change Text colour</p>
+        <p>Change Text Colour</p>
         <LayerColourPicker onChange={setLayerFill} />
       </div>
       <div className="flex flex-col gap-y-0.5">
