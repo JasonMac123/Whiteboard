@@ -40,7 +40,7 @@ export const Note = ({ id, layer, onPointerDown, selectionColour }: NoteLayerPro
       onPointerDown={(e) => onPointerDown(e, id)}
       style={{
         outline: selectionColour ? `1px solid ${selectionColour}` : "none",
-        backgroundColor: fill ? rgbHex(fill.r, fill.g, fill.b) : "#000",
+        backgroundColor: fill ? rgbHex(fill.r, fill.g, fill.b) : "#FFF",
       }}
       className="shadow-md drop-shadow-xl"
     >
