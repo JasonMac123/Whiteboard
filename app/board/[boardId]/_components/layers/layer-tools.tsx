@@ -74,14 +74,14 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       const liveLayersIds = storage.get("layerIds");
       const index: number[] = [];
 
-      const liveLayerArray = liveLayersIds.toArray();
+      const liveLayerArray = liveLayersIds.toImmutable();
 
       for (let i = 0; i < liveLayerArray.length; i++) {
         if (selection.includes(liveLayerArray[i])) index.push(i);
       }
 
-      for (let i = index.length; i >= 0; i--) {
-        liveLayersIds.move(index[i], index.length - 1 - (index.length - 1 - i));
+      for (let i = index.length - 1; i >= 0; i--) {
+        liveLayersIds.move(index[i], liveLayerArray.length - 1 - (index.length - 1 - i));
       }
     },
     [selection]
