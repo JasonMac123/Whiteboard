@@ -101,7 +101,14 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
         )`,
       }}
     >
-      <LayerColourPicker onChange={setLayerFill} />
+      <div>
+        <p>Change Layer colour</p>
+        <LayerColourPicker onChange={setLayerFill} />
+      </div>
+      <div>
+        <p>Change Text colour</p>
+        <LayerColourPicker onChange={setLayerFill} />
+      </div>
       <div className="flex flex-col gap-y-0.5">
         <HoverHint label="Bring to Front" sideOffset={12}>
           <Button variant="board" size="icon" onClick={moveToFront}>
