@@ -22,7 +22,7 @@ export const Rectangle = ({ id, layer, onPointerDown, selectionColour }: Rectang
       width={width}
       height={height}
       strokeWidth={1}
-      fill={fill ? rgbHex(fill.r, fill.g, fill.b) : "#000"}
+      fill={fill ? `#${rgbHex(fill.r, fill.g, fill.b)}` : "#000"}
       stroke={selectionColour || "transparent"}
     />
   );
