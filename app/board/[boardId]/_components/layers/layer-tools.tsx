@@ -2,7 +2,7 @@
 
 import { useMutation, useSelf } from "@/liveblocks.config";
 import { memo } from "react";
-import { AArrowDown, AArrowUp, BringToFront, SendToBack } from "lucide-react";
+import { AArrowDown, AArrowUp, BringToFront, SendToBack, Trash2 } from "lucide-react";
 
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { useSelectionArea } from "@/hooks/use-selection-area";
@@ -99,24 +99,24 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     >
       <LayerColourPicker onChange={setLayerFill} />
       <div className="flex flex-col gap-y-0.5">
-        <HoverHint label="Bring to Front">
+        <HoverHint label="Bring to Front" sideOffset={12}>
           <Button variant="board" size="icon" onClick={moveToFront}>
             <BringToFront />
           </Button>
         </HoverHint>
-        <HoverHint label="Bring to Back">
+        <HoverHint label="Bring to Back" side="bottom" sideOffset={12}>
           <Button variant="board" size="icon" onClick={moveToBack}>
             <SendToBack />
           </Button>
         </HoverHint>
       </div>
       <div className="flex flex-col gap-y-0.5">
-        <HoverHint label="Increase Text Size">
+        <HoverHint label="Increase Text Size" sideOffset={12}>
           <Button variant="board" size="icon" onClick={() => setFontSize(2)}>
             <AArrowUp />
           </Button>
         </HoverHint>
-        <HoverHint label="Decrease Text Size">
+        <HoverHint label="Decrease Text Size" side="bottom" sideOffset={12}>
           <Button variant="board" size="icon" onClick={() => setFontSize(-2)}>
             <AArrowDown />
           </Button>
@@ -124,7 +124,9 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       </div>
       <div className="flex items-center pl-2 ml-2 border-l border-neutral-200">
         <HoverHint label="Delete">
-          <Button variant="board" size="icon" onClick={deleteLayers} />
+          <Button variant="board" size="icon" onClick={deleteLayers}>
+            <Trash2 />
+          </Button>
         </HoverHint>
       </div>
     </div>
