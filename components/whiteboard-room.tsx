@@ -18,7 +18,7 @@ export const WhiteBoardRoom = ({ children, roomId, fallback }: WhiteBoardRoomPro
   return (
     <RoomProvider
       id={roomId}
-      initialPresence={{ cursor: null, selection: [] }}
+      initialPresence={{ cursor: null, selection: [], pencilDraft: null, penColour: null }}
       initialStorage={{
         layers: new LiveMap<string, LiveObject<Layer>>(),
         layerIds: new LiveList(),
