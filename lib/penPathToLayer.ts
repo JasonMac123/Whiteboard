@@ -1,6 +1,9 @@
 import { Colour, LayerType, PathLayer } from "@/types/layer";
 
-export function penPathToLayer(points: number[][], colour: Colour): PathLayer {
+export function penPathToLayer(
+  points: [x: number, y: number, pressure: number][],
+  colour: Colour
+): PathLayer {
   if (points.length < 2) {
     throw new Error("Cannot transform with 2 points");
   }
