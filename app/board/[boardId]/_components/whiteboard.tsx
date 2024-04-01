@@ -165,6 +165,29 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [lastColour]
   );
 
+  const continueDrawing = useMutation(
+    ({ self, setMyPresence }, point: Point, e: React.PointerEvent) => {
+      const { pencilDraft } = self.presence;
+
+      if (
+        whiteboardState.mode !== WhiteBoardMode.Pencil ||
+        e.buttons !== 1 ||
+        pencilDraft === null
+      ) {
+        return;
+      }
+
+      setMyPresence({
+        cursor: point,
+        pencilDraft:
+          pencilDraft.length === 1 && pencilDraft[0][0] === point.x && pencilDraft[0][1] === point.y
+            ? pencilDraft
+            : [...pencilDraft, [point.x, point.y, e.pressure]],
+      });
+    },
+    [whiteboardState.mode]
+  );
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -187,9 +210,19 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         translateLayers(current);
       } else if (whiteboardState.mode === WhiteBoardMode.Resizing) {
         resizeLayer(current);
+      } else if (whiteboardState.mode === WhiteBoardMode.Pencil) {
+        continueDrawing(current, e);
       }
     },
-    [whiteboardState, resizeLayer, camera]
+    [
+      whiteboardState,
+      resizeLayer,
+      translateLayers,
+      camera,
+      continueDrawing,
+      selectMultipleLayers,
+      updateSelectionNet,
+    ]
   );
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
