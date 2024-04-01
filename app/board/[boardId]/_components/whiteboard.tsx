@@ -158,6 +158,13 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [layerIds]
   );
 
+  const startDrawing = useMutation(
+    ({ setMyPresence }, point: Point, pressure: number) => {
+      setMyPresence({ pencilDraft: [[point.x, point.y, pressure]], penColour: lastColour });
+    },
+    [lastColour]
+  );
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -220,9 +227,14 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
         return;
       }
 
+      if (whiteboardState.mode === WhiteBoardMode.Pencil) {
+        startDrawing(point, e.pressure);
+        return;
+      }
+
       setWhiteboardState({ origin: point, mode: WhiteBoardMode.Pressing });
     },
-    [whiteboardState, camera]
+    [whiteboardState, setWhiteboardState, camera, startDrawing]
   );
 
   const onLayerPointerDown = useMutation(
