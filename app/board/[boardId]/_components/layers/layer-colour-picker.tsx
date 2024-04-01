@@ -3,11 +3,11 @@
 import { Colour } from "@/types/layer";
 import rgbHex from "rgb-hex";
 
-interface LayerColourPickerProps {
+interface ColourPickerProps {
   onChange: (colour: Colour) => void;
 }
 
-export const LayerColourPicker = ({ onChange }: LayerColourPickerProps) => {
+export const ColourPicker = ({ onChange }: ColourPickerProps) => {
   return (
     <div className="flex flex-wrap gap-2 items-center max-w-[164px] pr-2 mr-2 border-r border-neutral-200">
       <ColourButton onClick={onChange} colour={{ r: 243, g: 72, b: 35 }} />

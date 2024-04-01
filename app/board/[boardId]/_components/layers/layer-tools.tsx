@@ -9,7 +9,7 @@ import { useSelectionArea } from "@/hooks/use-selection-area";
 
 import { Camera, Colour, LayerType } from "@/types/layer";
 
-import { LayerColourPicker } from "./layer-colour-picker";
+import { ColourPicker } from "./layer-colour-picker";
 import { HoverHint } from "@/components/hover-hint";
 import { Button } from "@/components/ui/button";
 
@@ -109,11 +109,11 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     >
       <div>
         <p>Change Layer Colour</p>
-        <LayerColourPicker onChange={setLayerFill} />
+        <ColourPicker onChange={setLayerFill} />
       </div>
       <div>
         <p>Change Text Colour</p>
-        <LayerColourPicker onChange={setLayerFill} />
+        <ColourPicker onChange={setLayerFill} />
       </div>
       <div className="flex flex-col gap-y-0.5">
         <HoverHint label="Bring to Front" sideOffset={12}>
