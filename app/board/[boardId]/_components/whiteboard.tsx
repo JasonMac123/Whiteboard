@@ -20,6 +20,7 @@ import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 import { resizeBounds } from "@/lib/resizeBounds";
 import { randomColourToId } from "@/lib/utils";
 import { findIntersectingLayersWithSelection } from "@/lib/findIntersectingLayersWithSelection";
+import { penPathToLayer } from "@/lib/penPathToLayer";
 
 import { BoardInfo } from "./board-layout/board-info";
 import { BoardMembers } from "./board-layout/board-members";
@@ -188,6 +189,28 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
     [whiteboardState.mode]
   );
 
+  const insertPencil = useMutation(
+    ({ storage, self, setMyPresence }) => {
+      const liveLayers = storage.get("layers");
+      const { pencilDraft } = self.presence;
+
+      if (pencilDraft == null || pencilDraft.length < 2 || liveLayers.size >= 120) {
+        setMyPresence({ pencilDraft: null });
+        return;
+      }
+
+      const id = nanoid();
+      liveLayers.set(id, new LiveObject(penPathToLayer(pencilDraft, lastColour)));
+
+      const liveLayersIds = storage.get("layerIds");
+      liveLayersIds.push(id);
+
+      setMyPresence({ pencilDraft: null });
+      setWhiteboardState({ mode: WhiteBoardMode.Pencil });
+    },
+    [lastColour]
+  );
+
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
@@ -239,6 +262,8 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
       ) {
         unselectLayer();
         setWhiteboardState({ mode: WhiteBoardMode.None });
+      } else if (whiteboardState.mode === WhiteBoardMode.Pencil) {
+        insertPencil();
       } else if (whiteboardState.mode === WhiteBoardMode.Inserting) {
         insertLayer(whiteboardState.layerType, point);
       } else {
@@ -249,7 +274,16 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
 
       history.resume();
     },
-    [camera, whiteboardState, history, insertLayer, translateLayers, unselectLayer]
+    [
+      camera,
+      whiteboardState,
+      setWhiteboardState,
+      history,
+      insertLayer,
+      translateLayers,
+      unselectLayer,
+      insertPencil,
+    ]
   );
 
   const onPointerDown = useCallback(
