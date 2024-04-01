@@ -31,6 +31,16 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
     [selection, setLastColour]
   );
 
+  const setLayerTextFill = useMutation(
+    ({ storage }, fill: Colour) => {
+      const liveLayers = storage.get("layers");
+      selection.forEach((id) => {
+        liveLayers.get(id)?.set("fill", fill);
+      });
+    },
+    [selection, setLastColour]
+  );
+
   const setFontSize = useMutation(
     ({ storage }, change: number) => {
       const liveLayers = storage.get("layers");
@@ -113,7 +123,7 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       </div>
       <div>
         <p>Change Text Colour</p>
-        <ColourPicker onChange={setLayerFill} />
+        <ColourPicker onChange={setLayerTextFill} />
       </div>
       <div className="flex flex-col gap-y-0.5">
         <HoverHint label="Bring to Front" sideOffset={12}>
