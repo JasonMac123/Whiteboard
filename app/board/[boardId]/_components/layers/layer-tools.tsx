@@ -32,10 +32,14 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
   );
 
   const setLayerTextFill = useMutation(
-    ({ storage }, fill: Colour) => {
+    ({ storage }, textFill: Colour) => {
       const liveLayers = storage.get("layers");
       selection.forEach((id) => {
-        liveLayers.get(id)?.set("fill", fill);
+        const layerType = liveLayers.get(id)?.get("type");
+
+        if (layerType === LayerType.Text || LayerType.Note) {
+          liveLayers.get(id)?.set("textFill", textFill);
+        }
       });
     },
     [selection, setLastColour]
