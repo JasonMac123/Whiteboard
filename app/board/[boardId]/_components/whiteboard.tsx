@@ -9,6 +9,7 @@ import {
   useMutation,
   useStorage,
   useOthersMapped,
+  useSelf,
 } from "@/liveblocks.config";
 import { LiveObject } from "@liveblocks/client";
 
@@ -28,9 +29,11 @@ import { ToolKit } from "./board-layout/tool-kit/index";
 
 import { LayerTools } from "./layers/layer-tools";
 import { LayerPreview } from "./layers/layer-preview";
+import { Path } from "./layers/path-layer";
 
 import { CursorPresence } from "./cursor-presence";
 import { SelectionBox } from "./selection-box";
+import rgbHex from "rgb-hex";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -38,6 +41,7 @@ interface WhiteBoardProps {
 
 export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
   const layerIds = useStorage((root) => root.layerIds);
+  const pencilDraft = useSelf((me) => me.presence.pencilDraft);
 
   const [whiteboardState, setWhiteboardState] = useState<WhiteBoardState>({
     mode: WhiteBoardMode.None,
@@ -400,6 +404,14 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
               />
             )}
           <CursorPresence />
+          {pencilDraft !== null && pencilDraft.length > 0 && (
+            <Path
+              points={pencilDraft}
+              fill={rgbHex(lastColour.r, lastColour.g, lastColour.b)}
+              x={0}
+              y={0}
+            />
+          )}
         </g>
       </svg>
     </main>
