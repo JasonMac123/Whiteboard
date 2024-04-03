@@ -78,12 +78,16 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
       const liveLayers = storage.get("layers");
 
       selection.forEach((id) => {
-        const defaultChange = change > 0 ? 10 : 350;
-        const newRotation = liveLayers.get(id)?.get("rotation")
-          ? liveLayers.get(id)?.get("rotation") + change
-          : defaultChange;
+        const layerType = liveLayers.get(id)?.get("type");
 
-        liveLayers.get(id)?.set("rotation", newRotation);
+        if (layerType !== LayerType.Path) {
+          const defaultChange = change > 0 ? 10 : 350;
+          const newRotation = liveLayers.get(id)?.get("rotation")
+            ? liveLayers.get(id)?.get("rotation") + change
+            : defaultChange;
+
+          liveLayers.get(id)?.set("rotation", newRotation);
+        }
       });
     },
     [selection]
