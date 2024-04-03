@@ -33,7 +33,7 @@ export function findIntersectingLayersWithSelection(
     ) {
       ids.push(layerId);
     }
-
-    return ids;
   }
+
+  return ids;
 }
