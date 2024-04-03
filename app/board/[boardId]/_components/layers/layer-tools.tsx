@@ -8,6 +8,9 @@ import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { useSelectionArea } from "@/hooks/use-selection-area";
 
 import { Camera, Colour, LayerType } from "@/types/layer";
+import { Point } from "@/types/whiteboard";
+
+import { getAngle } from "@/lib/getAngle";
 
 import { ColourPicker } from "./layer-colour-picker";
 import { HoverHint } from "@/components/hover-hint";
@@ -60,6 +63,19 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
 
           liveLayers.get(id)?.set("fontSize", newFontSize);
         }
+      });
+    },
+    [selection]
+  );
+
+  const handleRotation = useMutation(
+    ({ storage }, point: Point) => {
+      const liveLayers = storage.get("layers");
+
+      selection.forEach((id) => {
+        const newAngle = getAngle(point);
+
+        liveLayers.get(id)?.set("rotation", newAngle);
       });
     },
     [selection]
