@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { nanoid } from "nanoid";
+import rgbHex from "rgb-hex";
 import {
   useHistory,
   useCanRedo,
@@ -16,8 +17,10 @@ import { LiveObject } from "@liveblocks/client";
 import { Camera, Colour, LayerType } from "@/types/layer";
 import { WhiteBoardMode, Point, WhiteBoardState, Side, XYWH } from "@/types/whiteboard";
 
-import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
+import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
+import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
+import { pointerEventToWhiteboardPoint } from "@/lib/pointerEventToWhiteboard";
 import { resizeBounds } from "@/lib/resizeBounds";
 import { randomColourToId } from "@/lib/utils";
 import { findIntersectingLayersWithSelection } from "@/lib/findIntersectingLayersWithSelection";
@@ -33,7 +36,6 @@ import { Path } from "./layers/path-layer";
 
 import { CursorPresence } from "./cursor-presence";
 import { SelectionBox } from "./selection-box";
-import rgbHex from "rgb-hex";
 
 interface WhiteBoardProps {
   boardId: string;
@@ -49,9 +51,34 @@ export const WhiteBoard = ({ boardId }: WhiteBoardProps) => {
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
   const [lastColour, setLastColour] = useState<Colour>({ r: 0, g: 0, b: 0 });
 
+  const deleteLayers = useDeleteLayers();
+  useDisableScrollBounce();
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  useEffect(() => {
+    function onKeyDown(evt: KeyboardEvent) {
+      switch (evt.key) {
+        case "z": {
+          if (evt.ctrlKey || evt.metaKey) {
+            if (evt.shiftKey) {
+              history.redo();
+            } else {
+              history.undo();
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [deleteLayers, history]);
 
   const insertLayer = useMutation(
     (
