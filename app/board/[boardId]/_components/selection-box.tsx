@@ -33,7 +33,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
       <rect
         className="fill-transparent stroke-blue-500 stroke-1 pointer-events-none"
         style={{
-          transform: `translate(${bounds.x}px, ${bounds.y}px) rotate(${rotationAngle * 2}deg)`,
+          transform: `translate(${bounds.x}px, ${bounds.y}px) rotate(${rotationAngle}deg)`,
         }}
         x={0}
         y={0}
@@ -51,9 +51,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               cursor: "nwse-resize",
               width: "8px",
               height: "8px",
-              transform: `translate(${bounds.x - 4}px, ${
-                bounds.y - 4
-              }px) rotate(${rotationAngle}deg)`,
+              transform: `translate(${bounds.x - 4}px, ${bounds.y - 4}px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -69,9 +67,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               cursor: "ns-resize",
               width: "8px",
               height: "8px",
-              transform: `translate(${bounds.x + bounds.width / 2 - 4}px, ${
-                bounds.y - 4
-              }px) rotate(${rotationAngle}deg)`,
+              transform: `translate(${bounds.x + bounds.width / 2 - 4}px, ${bounds.y - 4}px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -87,9 +83,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               cursor: "nesw-resize",
               width: "8px",
               height: "8px",
-              transform: `translate(${bounds.x - 4 + bounds.width}px, ${
-                bounds.y - 4
-              }px) rotate(${rotationAngle}deg)`,
+              transform: `translate(${bounds.x - 4 + bounds.width}px, ${bounds.y - 4}px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -107,7 +101,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               height: "8px",
               transform: `translate(${bounds.x - 4 + bounds.width}px, ${
                 bounds.y + bounds.height / 2 - 4
-              }px) rotate(${rotationAngle}deg)`,
+              }px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -125,7 +119,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               height: "8px",
               transform: `translate(${bounds.x + bounds.width - 4}px, ${
                 bounds.y + bounds.height - 4
-              }px) rotate(${rotationAngle}deg)`,
+              }px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -143,7 +137,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               height: "8px",
               transform: `translate(${bounds.x + bounds.width / 2 - 4}px, ${
                 bounds.y + bounds.height - 4
-              }px) rotate(${rotationAngle}deg)`,
+              }px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -159,9 +153,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               cursor: "nesw-resize",
               width: "8px",
               height: "8px",
-              transform: `translate(${bounds.x - 4}px, ${
-                bounds.y + bounds.height - 4
-              }px) rotate(${rotationAngle}deg)`,
+              transform: `translate(${bounds.x - 4}px, ${bounds.y + bounds.height - 4}px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -177,9 +169,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
               cursor: "ew-resize",
               width: "8px",
               height: "8px",
-              transform: `translate(${bounds.x - 4}px, ${
-                bounds.y + bounds.height / 2 - 4
-              }px) rotate(${rotationAngle}deg)`,
+              transform: `translate(${bounds.x - 4}px, ${bounds.y + bounds.height / 2 - 4}px)`,
             }}
             onPointerDown={(e) => {
               e.stopPropagation();

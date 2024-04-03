@@ -17,7 +17,7 @@ export const Rectangle = ({ id, layer, onPointerDown, selectionColour }: Rectang
       className="drop-shadow-md"
       onPointerDown={(e) => onPointerDown(e, id)}
       style={{
-        transform: `translate(${x}px, ${y}px) rotate(${rotation}deg) rotate(${rotation}deg)`,
+        transform: `translate(${x}px, ${y}px) rotate(${rotation}deg)`,
       }}
       x={0}
       y={0}
