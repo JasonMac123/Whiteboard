@@ -14,23 +14,17 @@ interface WhiteBoardRoomProps {
   fallback: NonNullable<ReactNode> | null;
 }
 
-export const WhiteBoardRoom = ({
-  children,
-  roomId,
-  fallback,
-}: WhiteBoardRoomProps) => {
+export const WhiteBoardRoom = ({ children, roomId, fallback }: WhiteBoardRoomProps) => {
   return (
     <RoomProvider
       id={roomId}
-      initialPresence={{ cursor: null, selection: [] }}
+      initialPresence={{ cursor: null, selection: [], pencilDraft: null, penColour: null }}
       initialStorage={{
         layers: new LiveMap<string, LiveObject<Layer>>(),
         layerIds: new LiveList(),
       }}
     >
-      <ClientSideSuspense fallback={fallback}>
-        {() => children}
-      </ClientSideSuspense>
+      <ClientSideSuspense fallback={fallback}>{() => children}</ClientSideSuspense>
     </RoomProvider>
   );
 };

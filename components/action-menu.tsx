@@ -27,13 +27,7 @@ interface ActionMenuProps {
   title: string;
 }
 
-export const ActionMenu = ({
-  children,
-  side,
-  sideOffset,
-  id,
-  title,
-}: ActionMenuProps) => {
+export const ActionMenu = ({ children, side, sideOffset, id, title }: ActionMenuProps) => {
   const router = useRouter();
 
   const { onOpen } = useRenameDialog();
@@ -68,10 +62,7 @@ export const ActionMenu = ({
           <Link2 className="h-4 w-4 mr-2" />
           Copy Board Link
         </DropdownMenuItem>
-        <DropdownMenuItem
-          className="p-3 cursor-pointer"
-          onClick={() => onOpen(id, title)}
-        >
+        <DropdownMenuItem className="p-3 cursor-pointer" onClick={() => onOpen(id, title)}>
           <Pencil className="h-4 w-4 mr-2" />
           Rename
         </DropdownMenuItem>

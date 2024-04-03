@@ -110,18 +110,8 @@ export const ToolKit = ({
         />
       </div>
       <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">
-        <ToolButton
-          label="Undo"
-          icon={Undo2}
-          onClick={undo}
-          disabled={!canUndo}
-        />
-        <ToolButton
-          label="Redo"
-          icon={Redo2}
-          onClick={redo}
-          disabled={!canRedo}
-        />
+        <ToolButton label="Undo" icon={Undo2} onClick={undo} disabled={!canUndo} />
+        <ToolButton label="Redo" icon={Redo2} onClick={redo} disabled={!canRedo} />
       </div>
     </div>
   );

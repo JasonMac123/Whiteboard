@@ -1,9 +1,4 @@
-import {
-  createClient,
-  LiveList,
-  LiveMap,
-  LiveObject,
-} from "@liveblocks/client";
+import { createClient, LiveList, LiveMap, LiveObject } from "@liveblocks/client";
 import { createRoomContext, createLiveblocksContext } from "@liveblocks/react";
 
 import { Layer, Colour } from "./types/layer";
@@ -59,6 +54,8 @@ const client = createClient({
 type Presence = {
   cursor: { x: number; y: number } | null;
   selection: string[];
+  pencilDraft: [x: number, y: number, pressure: number][] | null;
+  penColour: Colour | null;
 };
 
 // Optionally, Storage represents the shared document that persists in the
@@ -142,9 +139,7 @@ export const {
     // useUser,
     // useRoomInfo
   },
-} = createRoomContext<Presence, Storage, UserMeta, RoomEvent, ThreadMetadata>(
-  client
-);
+} = createRoomContext<Presence, Storage, UserMeta, RoomEvent, ThreadMetadata>(client);
 
 // Project-level hooks, use inside `LiveblocksProvider`
 export const {

@@ -31,10 +31,7 @@ export const BoardMembers = () => {
         )}
 
         {users.length > 3 && (
-          <UserAvatar
-            name={`${users.length - 3} more`}
-            fallback={`+${users.length - 3}`}
-          />
+          <UserAvatar name={`${users.length - 3} more`} fallback={`+${users.length - 3}`} />
         )}
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { Loader2 } from "lucide-react";
 
-import { BoardInfoSkeleton } from "./board-info";
-import { BoardMembersSkeleton } from "./board-members";
-import { ToolKitSkeleton } from "./tool-kit/index";
+import { BoardInfoSkeleton } from "./board-layout/board-info";
+import { BoardMembersSkeleton } from "./board-layout/board-members";
+import { ToolKitSkeleton } from "./board-layout/tool-kit/index";
 
 export const WhiteBoardLoading = () => {
   return (

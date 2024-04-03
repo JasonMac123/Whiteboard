@@ -35,15 +35,8 @@ export const BoardInfo = ({ boardId }: BoardInfoProps) => {
       <HoverHint label="Go back to homepage" side="bottom" sideOffset={12}>
         <Button asChild className="px-2" variant={"board"}>
           <Link href={"/"}>
-            <Image
-              src={"/images/WhiteBoard.png"}
-              alt="Logo"
-              height={50}
-              width={50}
-            />
-            <span className="font-semibold text-xl ml-2 text-black">
-              WhiteBoard
-            </span>
+            <Image src={"/images/WhiteBoard.png"} alt="Logo" height={20} width={20} />
+            <span className="font-semibold text-xl ml-2 text-black">WhiteBoard</span>
           </Link>
         </Button>
       </HoverHint>

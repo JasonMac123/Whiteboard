@@ -39,9 +39,7 @@ export const remove = mutation({
 
     const existingFavourites = await ctx.db
       .query("userFavourites")
-      .withIndex("by_user_board", (q) =>
-        q.eq("userId", userId).eq("boardId", args.id)
-      )
+      .withIndex("by_user_board", (q) => q.eq("userId", userId).eq("boardId", args.id))
       .unique();
 
     if (existingFavourites) {
@@ -68,9 +66,7 @@ export const update = mutation({
     }
 
     if (title.length < 8 || title.length > 50) {
-      throw new Error(
-        "Title minimum length is 8 characters and max length is 50 characters"
-      );
+      throw new Error("Title minimum length is 8 characters and max length is 50 characters");
     }
 
     const board = await ctx.db.patch(args.id, {
