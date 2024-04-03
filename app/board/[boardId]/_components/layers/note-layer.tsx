@@ -20,7 +20,7 @@ interface NoteLayerProps {
 }
 
 export const Note = ({ id, layer, onPointerDown, selectionColour }: NoteLayerProps) => {
-  const { x, y, width, height, fill, textFill, value, fontSize } = layer;
+  const { x, y, width, height, fill, textFill, value, fontSize, rotation } = layer;
 
   const updateValue = useMutation(({ storage }, newValue: string) => {
     const liveLayers = storage.get("layers");
@@ -41,6 +41,7 @@ export const Note = ({ id, layer, onPointerDown, selectionColour }: NoteLayerPro
       style={{
         outline: selectionColour ? `1px solid ${selectionColour}` : "none",
         backgroundColor: fill ? `#${rgbHex(fill.r, fill.g, fill.b)}` : "#feff9c",
+        transform: `rotate(${rotation}deg)`,
       }}
       className="shadow-md drop-shadow-xl"
     >

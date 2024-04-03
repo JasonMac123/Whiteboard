@@ -12,7 +12,7 @@ interface EllipseLayerProps {
 }
 
 export const Ellipse = ({ id, layer, onPointerDown, selectionColour }: EllipseLayerProps) => {
-  const { x, y, width, height, fill } = layer;
+  const { x, y, width, height, fill, rotation } = layer;
 
   return (
     <ellipse

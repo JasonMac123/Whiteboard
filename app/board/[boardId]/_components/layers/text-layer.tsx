@@ -20,7 +20,7 @@ interface TextLayerProps {
 }
 
 export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerProps) => {
-  const { x, y, width, height, fill, value, fontSize } = layer;
+  const { x, y, width, height, fill, value, fontSize, rotation } = layer;
 
   const updateValue = useMutation(({ storage }, newValue: string) => {
     const liveLayers = storage.get("layers");
@@ -40,6 +40,7 @@ export const Text = ({ id, layer, onPointerDown, selectionColour }: TextLayerPro
       onPointerDown={(e) => onPointerDown(e, id)}
       style={{
         outline: selectionColour ? `1px solid ${selectionColour}` : "none",
+        transform: `rotate(${rotation}deg)`,
       }}
     >
       <ContentEditable
