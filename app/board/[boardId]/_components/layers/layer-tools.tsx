@@ -16,9 +16,6 @@ import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { useSelectionArea } from "@/hooks/use-selection-area";
 
 import { Camera, Colour, LayerType } from "@/types/layer";
-import { Point } from "@/types/whiteboard";
-
-import { getAngle } from "@/lib/getAngle";
 
 import { ColourPicker } from "./layer-colour-picker";
 import { HoverHint } from "@/components/hover-hint";
