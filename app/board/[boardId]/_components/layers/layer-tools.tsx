@@ -2,7 +2,15 @@
 
 import { useMutation, useSelf } from "@/liveblocks.config";
 import { memo } from "react";
-import { AArrowDown, AArrowUp, BringToFront, SendToBack, Trash2 } from "lucide-react";
+import {
+  AArrowDown,
+  AArrowUp,
+  BringToFront,
+  RotateCcw,
+  RotateCw,
+  SendToBack,
+  Trash2,
+} from "lucide-react";
 
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { useSelectionArea } from "@/hooks/use-selection-area";
@@ -69,13 +77,16 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
   );
 
   const handleRotation = useMutation(
-    ({ storage }, point: Point) => {
+    ({ storage }, change) => {
       const liveLayers = storage.get("layers");
 
       selection.forEach((id) => {
-        const newAngle = getAngle(point);
+        const defaultChange = change > 0 ? 10 : 350;
+        const newRotation = liveLayers.get(id)?.get("rotation")
+          ? liveLayers.get(id)?.get("rotation") + change
+          : defaultChange;
 
-        liveLayers.get(id)?.set("rotation", newAngle);
+        liveLayers.get(id)?.set("rotation", newRotation);
       });
     },
     [selection]
@@ -166,6 +177,18 @@ export const LayerTools = memo(({ camera, setLastColour }: LayerToolsProps) => {
         <HoverHint label="Decrease Text Size" side="bottom" sideOffset={12}>
           <Button variant="board" size="icon" onClick={() => setFontSize(-2)}>
             <AArrowDown />
+          </Button>
+        </HoverHint>
+      </div>
+      <div className="flex flex-col gap-y-0.5">
+        <HoverHint label="Rotate Right" sideOffset={12}>
+          <Button variant="board" size="icon" onClick={() => handleRotation(10)}>
+            <RotateCw />
+          </Button>
+        </HoverHint>
+        <HoverHint label="Rotate Left" side="bottom" sideOffset={12}>
+          <Button variant="board" size="icon" onClick={() => handleRotation(-10)}>
+            <RotateCcw />
           </Button>
         </HoverHint>
       </div>
