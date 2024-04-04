@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Whiteboard
 
-## Getting Started
+A website where users can create a storyboard where others can collaborate and plan.
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This website application allows users to create a board that can host their storyboard and invite other users to participate and plan. The storyboard can be made with many different layer options such as notes, text, circles, triangles, and pen drawing. The layers can be rotated, height and width altered, change background colour, increase text size, change text colour, and more.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Whiteboard is built with the next.js app version to have both server side and client side rendering. The project uses typescript with the back-end built using clerk and convex. Users can register or sign up with their google accounts or their own email using clerk. Users can then create a board, access any board on their homepage dashboard, then access any board. All pages have client-side loading states while the server fetches the board data/user data through convex clerk and renders the components.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Dependencies
 
-## Learn More
+This project requires node.js to be installed in order to be run
 
-To learn more about Next.js, take a look at the following resources:
+### Installing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Clone the project
+- Create a liveblocks account to host the drawing room
+- Create a convex account to handle back-end and authetication
+- Create an environment file with Clerk, Convex, and Liveblocks keys
+- Run "npm install" in the file directory
+- Run "npx convex dev" to create back-end api functions
+-
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Executing program
 
-## Deploy on Vercel
+- To execute run the command "npm run dev"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Authors
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Jason mac  
+[@JasonMaC](https://github.com/JasonMac123/)
+
+## Version History
+
+- 0.1
+  - Initial Release
